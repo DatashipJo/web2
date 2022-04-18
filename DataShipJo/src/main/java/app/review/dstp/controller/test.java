@@ -13,4 +13,9 @@ public class test
 	public String datashipjo() {
 		return "test";
 	}
+	
+	@GetMapping("/dataship2")
+	public String datashipjo2() {
+		return "test2";
+	}
 }
