@@ -2,6 +2,7 @@ package app.review.dstp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,9 +14,22 @@ public class test
 	public String datashipjo() {
 		return "test";
 	}
-	
-	@GetMapping("/dataship2")
-	public String datashipjo2() {
-		return "test2";
+
+	@GetMapping("/board")
+	public String boardMain(@PathVariable("area") String area){
+
+		return "board";
 	}
+	@GetMapping("/board/{area}")
+	public String board(@PathVariable("area") String area){
+
+		return "board";
+	}
+
+	@GetMapping("/3/{aera}")
+	public String boardMain2(@PathVariable("area") String area){
+
+		return "seoul2";
+	}
+
 }

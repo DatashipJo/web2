@@ -7,5 +7,9 @@
 </head>
 <body>
 TEST
+
+<%@ include file="seoul.html" %>
+
+<a href="/test2"> test2 </a>
 </body>
 </html>
