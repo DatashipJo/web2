@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dataship_war:war">
+    <output-path>$PROJECT_DIR$/dataship_war/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>dataship_war</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="dataship_war-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="dataship_war:war exploded" />
+    </root>
+  </artifact>
+</component>
