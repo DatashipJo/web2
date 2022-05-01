@@ -20,16 +20,19 @@ public class test
 
 		return "board";
 	}
+
 	@GetMapping("/board/{area}")
 	public String board(@PathVariable("area") String area){
 
-		return "board";
+		return "redirect:/";
 	}
 
-	@GetMapping("/3/{aera}")
-	public String boardMain2(@PathVariable("area") String area){
-
-		return "seoul2";
+	@GetMapping("/boot")
+	public String boot() {
+		return "thymeleaf/bootstrap/boot";
 	}
-
+	@GetMapping("/")
+	public String main() {
+		return "thymeleaf/seoul";
+	}
 }
