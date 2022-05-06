@@ -8,15 +8,15 @@
 		resultType="app.review.dstp.vo.chicken_list_vo"
 		parameterType="Integer">
 		SELECT num,store,adress,rating
-		FROM ck_list_jongno
+		FROM ck_store
 		WHERE num = #{num}	
 	</select>
 	
 	<select id="getChickenList"
-			parameterType = "String"
-			resultType="app.review.dstp.vo.chicken_list_vo">
-		SELECT num,store,adress,rating
-		FROM ck_list_jongno WHERE address LIKE '%#{String}%'
+		parameterType = "String"
+		resultType="app.review.dstp.vo.chicken_list_vo">
+		SELECT num,store,adress,s_rating,img
+		FROM ck_store WHERE adress LIKE '%종로구%'
 	</select>
 	
 	<select id="getDetailList"
