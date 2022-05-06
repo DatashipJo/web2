@@ -23,7 +23,7 @@ public class chicken
 	}
 
 	@GetMapping("/board/{area}")
-	public String board(@PathVariable("area") String area){
+	public String board(@PathVariable("area") String area, Model m){
 		m.addAttribute("tableList", dao.getChickenList(area));
 		return "thymeleaf/list";
 	}
