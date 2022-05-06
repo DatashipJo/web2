@@ -52,5 +52,5 @@ public class chicken
 //		
 //		// 리텅도 리다이렉트가 아니라 뷰주소로 변경~!
 //		return "redirect:/";
-//	}
+//	} 
 }
