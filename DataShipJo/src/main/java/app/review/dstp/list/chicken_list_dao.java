@@ -24,8 +24,11 @@ public class chicken_list_dao {
 		return clm.getUserById(num);
 	}
 	
-	public List<chicken_list_vo> getChickenList() {
-		return clm.getChickenList();
+	public List<chicken_list_vo> getChickenList(String aera) {
+		if (area == "jongno"){
+			String res = "종로구";
+		}
+		return clm.getChickenList(res);
 	}
 	
 	public int update(chicken_list_vo vo) {

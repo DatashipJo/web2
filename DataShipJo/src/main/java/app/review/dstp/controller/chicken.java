@@ -22,23 +22,12 @@ public class chicken
 		return "test";
 	}
 
-	@GetMapping("/board")
-	public String boardMain(@PathVariable("area") String area){
-
-		return "board";
-	}
-
 	@GetMapping("/board/{area}")
 	public String board(@PathVariable("area") String area){
-
-		return "redirect:/";
+		m.addAttribute("tableList", dao.getChickenList(area));
+		return "thymeleaf/list";
 	}
 	
-	@GetMapping("/board/jongno")
-	public String jongno_list(Model m) {
-		m.addAttribute("tableList", dao.getChickenList());
-		return "thymeleaf/jongno";
-	}
 
 	@GetMapping("/boot")
 	public String boot() {

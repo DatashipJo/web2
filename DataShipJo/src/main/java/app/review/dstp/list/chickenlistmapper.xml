@@ -12,9 +12,11 @@
 		WHERE num = #{num}	
 	</select>
 	
-	<select id="getChickenList" resultType="app.review.dstp.vo.chicken_list_vo">
+	<select id="getChickenList"
+			parameterType = "String"
+			resultType="app.review.dstp.vo.chicken_list_vo">
 		SELECT num,store,adress,rating
-		FROM ck_list_jongno
+		FROM ck_list_jongno WHERE address LIKE '%#{String}%'
 	</select>
 	
 	<select id="getDetailList"
