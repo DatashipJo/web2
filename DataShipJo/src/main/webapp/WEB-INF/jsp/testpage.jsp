@@ -187,7 +187,6 @@ public class BoardDao {
                           		id = rs.getString("id");
                           		rating = rs.getString("rating");
                           		review = rs.getString("review");
-                          		
                           	%>
                           	<tr>
                           	<td><%=id%></td>
