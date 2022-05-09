@@ -206,6 +206,7 @@ public class BoardDao {
                         </tbody>
                       </table>
                     </div>
+                    
                   </div>
                 </div>
               </div>
