@@ -66,6 +66,8 @@ public class BoardDao {
     Result rs = null;
 
     
+    
+    
     public BoardDao() {
         try {
             System.out.println("생성자");
