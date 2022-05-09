@@ -8,11 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.review.dstp.list.chicken_list_dao;
+import app.review.dstp.svc.chicken_svc;
 
 @Controller
 @RequestMapping("/")
 public class chicken 
 {
+	
+	@Autowired
+	private chicken_svc svc;
 	
 	@Autowired
 	private chicken_list_dao dao;

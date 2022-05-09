@@ -258,7 +258,7 @@ ul.imgs li{
 			</div>
     	</tr> 	
         <tr th:each="list : ${tableList}">	
-	        <td style="padding-left:5px; padding-top:5px; padding-right:5px;" width=50><a href="#"><img src="../images/bhc-종로.png" width="40" height="50"></a></td>
+	        <td style="padding-left:5px; padding-top:5px; padding-right:5px;" width=50><a href="#"><img th:src="${list.img}" width="40" height="50"></a></td>
 	        <td style="padding-left:5px; padding-right:5px;" width=50>&nbsp; <span th:text="${list.num}"></span></td>
 	        <td align="left"><a href="#"><span th:text="${list.store}"></span></a></td>
 	        <td align="right"><img src="../images/치킨로고2.png" width="35" height="35"></td>
