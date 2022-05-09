@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="app.review.dstp.list.ChickenListMapper">
+
+	<select id="getUserById"
+		resultType="app.review.dstp.vo.chicken_list_vo"
+		parameterType="Integer">
+		SELECT num,store,adress,rating
+		FROM ck_store
+		WHERE num = #{num}	
+	</select>
+	
+	<select id="getChickenList"
+		parameterType = "String"
+		resultType="app.review.dstp.vo.chicken_list_vo">
+		SELECT num,store,adress,s_rating,img
+		FROM ck_store WHERE adress LIKE '%종로구%'
+	</select>
+	
+	<select id="getDetailList"
+		resultType="app.review.dstp.vo.chicken_list_vo">
+		SELECT title,name,hit,content,nj_url
+		FROM edel_notice
+	</select>
+	
+	<!--insert 요소는 resultType 속성이 없어도 생성된 행의 수(정수)가 리턴됨-->
+    <insert id="insertUser" 
+    	parameterType="app.review.dstp.vo.chicken_list_vo">
+    	INSERT INTO edel_notice VALUES(NULL,#{title},#{name},#{content},NULL,NOW(),#{nj_url})
+    </insert>
+    
+    <delete id="deleteUser" parameterType="Integer">
+    	DELETE FROM edel_notice WHERE num=#{num}
+    </delete>
+    
+    <update id="updateNotice" parameterType="app.review.dstp.vo.chicken_list_vo">
+    	UPDATE edel_notice
+    	SET title=#{title}, content=#{content}
+    	WHERE num=#{num}
+    </update>
+</mapper>
