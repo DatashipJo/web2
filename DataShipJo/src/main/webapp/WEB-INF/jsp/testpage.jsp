@@ -137,7 +137,7 @@ public class BoardDao {
                     <div class="row align-items-center">
                     
             
-                   
+                 
 			<div class="col">	
               <div class="col-12 grid-margin stretch-card">
                 <div class="card corona-gradient-card">
