@@ -175,7 +175,6 @@ public class BoardDao {
                             <td> 　   </td>
                             <td> 　   </td>
 							<td> 　   </td>
-
                           </tr>
                         </thead>
                         <tbody>
