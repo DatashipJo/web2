@@ -31,8 +31,15 @@ public class test
 	public String boot() {
 		return "thymeleaf/bootstrap/boot";
 	}
+	
+	
 	@GetMapping("/")
 	public String main() {
 		return "thymeleaf/seoul";
+	}
+	
+	@GetMapping("/store/{area}")
+	public String store(@PathVariable("area") String area) {
+		return "redirect:/";
 	}
 }
