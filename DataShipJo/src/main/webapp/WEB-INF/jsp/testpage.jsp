@@ -136,7 +136,7 @@ public class BoardDao {
                   <div class="card-body py-0 px-0 px-sm-3">
                     <div class="row align-items-center">
                     
-            
+      
                  
 			<div class="col">	
               <div class="col-12 grid-margin stretch-card">
