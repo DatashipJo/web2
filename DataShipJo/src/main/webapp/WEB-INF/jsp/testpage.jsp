@@ -219,7 +219,6 @@ public class BoardDao {
             </div>
           </footer>
           <!-- partial -->
-          
         </div>
         <!-- main-panel ends -->
       </div>
