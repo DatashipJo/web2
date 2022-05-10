@@ -43,6 +43,6 @@ public class chicken_list_dao {
 	public chicken_list_vo findWithoutId(chicken_list_vo vo) {
 		return clm.findWithoutId(vo);
 	}
-
+	
 
 }
