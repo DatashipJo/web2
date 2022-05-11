@@ -52,11 +52,29 @@ public class chicken
 		return "thymeleaf/seoul";
 	}
 	
-	@GetMapping("/pagepage/{area}")
-	public String pagepage(@PathVariable("area")String area, Model m) {
-		m.addAttribute("tableList",svc.getChickenList(area));
+	@GetMapping("/pagepage")
+	public String pagepage(Model m) {
+		m.addAttribute("tableList",dao.getChickenList2());
 		return "thymeleaf/pagepage";
 	}
-
+	/*
+	@GetMapping("/hello")
+	public String hello(Model m) {
+		m.addAttribute("tableList",dao.getChickenList2());
+		return "thymeleaf/hello";
+	}
+	
+	/*
+	@GetMapping("/pagepage/{area}")
+	public String pagepage() {
+		return"thymeleaf/pagepage";
+	}
+	
+	/*
+	@GetMapping("/page_test/{area}")
+	public String page_test() {
+		return "thymeleaf/page_test";
+	}
+*/
  
 }

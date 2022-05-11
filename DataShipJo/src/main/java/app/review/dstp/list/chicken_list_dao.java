@@ -44,5 +44,10 @@ public class chicken_list_dao {
 		return clm.findWithoutId(vo);
 	}
 	
+	
+	public List<chicken_list_vo> getChickenList2() {
+		
+		return clm.getChickenList2();
+	}
 
 }

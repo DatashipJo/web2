@@ -48,7 +48,8 @@
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
 			crossorigin="anonymous"></script>
 	</script>
-	
+
+<!--  
 <script>
 
 $(document).ready(function(){
@@ -100,6 +101,7 @@ $(document).ready(function(){
  
 
 </script>	
+-->	
   </head>
   
   <form id="page_test"  onsubmit="page_test();">
@@ -114,7 +116,6 @@ $(document).ready(function(){
         <ul class="nav">
         </ul>
       </nav>
-      
       
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
@@ -255,6 +256,7 @@ $(document).ready(function(){
 		                   </div>
                         </div>
                       </div>
+      
 	                <div class="card">
 	                  <div class="card-body">
 	                    <div class="d-flex flex-row justify-content-between">

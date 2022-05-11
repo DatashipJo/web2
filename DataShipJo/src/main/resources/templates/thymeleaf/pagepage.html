@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>서울치킨지도</title>
 <link rel="stylesheet" href="../css/style.css">
     
 <style>
@@ -11,18 +11,19 @@
       color: #ffffff;
 		}
 
- 	/*th, td{
- 		border-bottom: 1px solid #44444;
+ 	th, td {
+ 		border-bottom: 1px solid;
  		padding: 10px;
  		color: #ffffff;
  		}
- 		*/
+ 		
  	card {
 		display: flex;
 	 	justify-content: space-between;
         margin: 0 70px;
         margin-top: 65px;
-        flex-wrap: wrap;    
+        flex-wrap: wrap;
+        background-color: brown;
  	}
 </style>
        
@@ -30,7 +31,7 @@
          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
          crossorigin="anonymous"></script>
 
-  </head>
+</head>
   <body>
    <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
@@ -65,28 +66,54 @@
             </ul>
           </div>
            <!-- partial -->
-           <div class="card">
-           <div class="card-header">
-           Review-Box
-           </div>
-			<img src="../images/bhc.png" class="gradient-corona-img img-fluid" alt="" />
-			<div calss="card-body">
-			  <h3 class="mb-1 mb-sm-0"><span th:text="${store.store}"></span> </h3>
-			  <span th:text="${store.store}"> </span>
-			  <p class="card=text">아아아아아으아으으아아아아아....</p>
-			  </div>
-			  </div>
-			  
-			
-			
-			
+		    <div class="card" style="width: 18rem;">
+		  	<img src="../images/bhc.png" class="card-img-top" alt="...">
+		  <div class="card-body">
+		    <h5 class="card-title">Review</h5>
+		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		  </div>
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item">An item</li>
+		    <li class="list-group-item">A second item</li>
+		    <li class="list-group-item">A third item</li>
+		  </ul>
+		</div>
+	
+	
+	
+	 <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Reviews</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>   id   </th>
+                            <th> rating </th>
+                            <th> review </th>
+                            <td> 　   </td>
+                            <td> 　   </td>
+                            <td> 　   </td>
+                            <td> 　   </td>
+							<td> 　   </td>
+
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 			
               <div class="row">
               <div class="col-md-6 col-xl-4 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-row justify-content-between">
-                      <h4 class="card-title">Review</h4>
+                      <h4 class="card-title"> Review </h4>
                     </div>
                     <div class="preview-list">
                       <div class="preview-item border-bottom">
@@ -105,94 +132,17 @@
                           <div class="flex-grow">
                             <div class="d-flex d-md-block d-xl-flex justify-content-between">
                               <h6 class="preview-subject">
-                              <span th:text="${review.id}"></span>
+                              <span th:text="${list.id}"></span>
                               </h6>
                               
                             </div>
                             <p class="text-muted">
-                            <span th:text="${review.id}"></span>
+                            <span th:text="${list.id}"></span>
                             </p>
                           </div>
                         </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="../images/head.png" alt="image" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="../images/head.png">
-                              <span th:text="${review.id}"></span>
-                              </h6>
-                            </div>
-                            <p class="text-muted">
-                            <span th:text="${review.id}"></span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="../images/head.png" alt="image" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">
-                              <span th:text="${review.id}"></span>
-                              </h6>
-                            </div>
-                            <p class="text-muted">
-                            <span th:text="${review.id}"></span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="../images/head.png" alt="image" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">
-                              <span th:text="${review.id}"></span>
-                              </h6>
-                            </div>
-                            <p class="text-muted">
-                            <span th:text="${review.id}"></span>
-                            </p>
-                          	</div>
-		                   </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="../images/head.png" alt="image" class="rounded-circle" />
-                        </div>
-                        
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">
-                              <span th:text="${review.id}"></span>
-                              </h6>
-                            </div>
-                            <p class="text-muted">
-                            <span th:text="${review.id}"></span>
-                          	</div>
-		                   </div>
-                        </div>
-	                <div class="card">
-	                  <div class="card-body">
-	                    <div class="d-flex flex-row justify-content-between">
-	                      <h4 class="card-rating">Rating</h4>
-	                  	  </div>
-              			</div>
-              			</div>
-              			</tr>
-              			<!-- 더보기 버튼 넣기 -->
-						<button id="searchMoreNotify" class="btn btn-outline-primary btn-block col-sm-10 mx-auto">더 보기</button>
+                    
+
 		<!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">

@@ -12,11 +12,11 @@
 		WHERE num = #{num}	
 	</select>
 	
-	<select id="getChickenList"
+	<select id="getChickenList2"
 		parameterType = "String"
 		resultType="app.review.dstp.vo.chicken_list_vo">
-		SELECT num,store,adress,s_rating,img
-		FROM ck_store WHERE adress LIKE '%종로구%'
+		SELECT id,review,rating,date,num,fk
+		FROM ck_review where fk = 1 order by num desc limit 0,6
 	</select>
 	
 	<select id="getDetailList"

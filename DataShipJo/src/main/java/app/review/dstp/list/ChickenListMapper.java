@@ -14,4 +14,5 @@ public interface ChickenListMapper
 	int updateUser(chicken_list_vo vo);
 	int deleteUser(int num);
 	chicken_list_vo findWithoutId(chicken_list_vo vo);
+	List<chicken_list_vo> getChickenList2(); 
 }

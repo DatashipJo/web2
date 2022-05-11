@@ -7,6 +7,10 @@ public class chicken_list_vo
 	private String adress;	
 	private float s_rating;
 	private String img;
+	private int rating;
+	private String date;
+	private String id;
+	private String review;
 	
 	public chicken_list_vo() {}
 
@@ -49,6 +53,40 @@ public class chicken_list_vo
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+	
+	
 
 	
 
