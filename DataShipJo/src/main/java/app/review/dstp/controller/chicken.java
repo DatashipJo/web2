@@ -22,12 +22,12 @@ import app.review.dstp.vo.chicken_list_vo;
 
 @Controller
 @RequestMapping("/")
-public class chicken 
+public class chicken
 {
-	
+
 	@Autowired
 	private chicken_svc svc;
-	
+
 	@Autowired
 	private chicken_list_dao dao;
 
@@ -37,21 +37,22 @@ public class chicken
 	}
 
 	@GetMapping("/board/{area}")
-	public String board(@PathVariable("area") String area){
-		return "redirect:/";
+	public String board(@PathVariable("area") String area , Model m){
+		m.addAttribute("tableList",svc.getChickenList_area(area));
+		return "thymeleaf/list_copy";
 	}
-	
+
 
 	@GetMapping("/boot")
 	public String boot() {
 		return "thymeleaf/bootstrap/boot";
-	} 
-	
+	}
+
 	@GetMapping("/")
 	public String main() {
 		return "thymeleaf/seoul";
 	}
-	
+
 	@GetMapping("/pagepage")
 	public String pagepage(Model m) {
 		m.addAttribute("tableList",dao.getChickenList2());
@@ -63,18 +64,18 @@ public class chicken
 		m.addAttribute("tableList",dao.getChickenList2());
 		return "thymeleaf/hello";
 	}
-	
+
 	/*
 	@GetMapping("/pagepage/{area}")
 	public String pagepage() {
 		return"thymeleaf/pagepage";
 	}
-	
+
 	/*
 	@GetMapping("/page_test/{area}")
 	public String page_test() {
 		return "thymeleaf/page_test";
 	}
 */
- 
+
 }

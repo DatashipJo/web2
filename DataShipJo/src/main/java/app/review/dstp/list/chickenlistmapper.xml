@@ -12,16 +12,23 @@
 		WHERE num = #{num}	
 	</select>
 	
-	<select id="getChickenList2"
+	<select id="getChickenList_area"
 		parameterType = "String"
 		resultType="app.review.dstp.vo.chicken_list_vo">
+		SELECT !~~~~~~~~~~~!
+		FROM ck_store #{value}
+	</select>
+
+	<select id="getChickenList2"
+			parameterType = "String"
+			resultType="app.review.dstp.vo.chicken_list_vo">
 		SELECT id,review,rating,date,num,fk
 		FROM ck_review where fk = 1 order by num desc limit 0,6
 	</select>
 	
 	<select id="getDetailList"
 		resultType="app.review.dstp.vo.chicken_list_vo">
-		SELECT title,name,hit,content,nj_url
+		SELECT  num,store,adress,rating
 		FROM edel_notice
 	</select>
 	

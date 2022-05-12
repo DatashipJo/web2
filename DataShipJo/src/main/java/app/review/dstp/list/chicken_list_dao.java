@@ -50,4 +50,7 @@ public class chicken_list_dao {
 		return clm.getChickenList2();
 	}
 
+    public List<chicken_list_vo> getChickenList_area(String groupedArea) {
+		return  clm.getChickenList_area();
+    }
 }
