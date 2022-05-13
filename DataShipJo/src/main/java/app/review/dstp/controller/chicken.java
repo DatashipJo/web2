@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import app.review.dstp.list.chicken_list_dao;
 import app.review.dstp.svc.chicken_svc;
-import app.review.dstp.vo.chicken_list_vo;
 
 @Controller
 @RequestMapping("/")
@@ -51,12 +50,40 @@ public class chicken
 	public String main() {
 		return "thymeleaf/seoul";
 	}
-	
+	/*
 	@GetMapping("/pagepage")
 	public String pagepage(Model m) {
 		m.addAttribute("tableList",dao.getChickenList2());
 		return "thymeleaf/pagepage";
 	}
+	*/
+	
+	@GetMapping("/pagepage/{area}")
+	public String pagepage(Model m) {
+		m.addAttribute("tableList",dao.getDetailList());
+		return "thymeleaf/pagepage";
+	}
+	
+	
+	@GetMapping("/list_copy/{area}")
+	public String list_copy(@PathVariable("area") String area, Model m){
+		m.addAttribute("tableList",svc.getChickenList(area));
+		return "thymeleaf/list_copy";
+	}
+	
+	@RequestMapping("moreList")
+    public String moreList(Model m) throws Exception {
+ 
+        return "/pagepage/moreList";
+    }
+	
+	/*
+	@GetMapping("/pagepage")
+	public String link(Model m) {
+		m.addAttribute("list.num","list.num");
+		return "list_copy/pagepage";
+	}
+	
 	/*
 	@GetMapping("/hello")
 	public String hello(Model m) {
@@ -70,11 +97,24 @@ public class chicken
 		return"thymeleaf/pagepage";
 	}
 	
-	/*
-	@GetMapping("/page_test/{area}")
-	public String page_test() {
-		return "thymeleaf/page_test";
+	// 더보기 요청
+	@RequestMapping(value = "/member/searchMoreNotify.do", produces = "application/text;charset=UTF-8", method=RequestMethod.POST)
+	@ResponseBody
+	public String searchMoreNotify(@RequestParam Map<String,String> param) throws Exception {
+		Map<String, String> searchParam = new HashMap<String, String>();	// search 파라미터 생성
+		searchParam.put("startIndex", param.get("startIndex"));	
+		searchParam.put("endIndex", param.get("endIndex"));
+		searchParam.put("m_id", param.get("m_id"));
+		// startIndex ~ endIndex 범위에 해당하는 list 조회 
+		List<MemberP005VO> addList = memberP005_d001Service.searchOldNotifyList(searchParam);
+		for(MemberP005VO vo : addList) {	// 날짜 포맷 변경
+			vo.setN_time(Common.formatTimeString(vo.getN_time(), commonService));
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(addList);
+		return jsonStr;
 	}
+	
 */
  
 }

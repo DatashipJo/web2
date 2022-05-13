@@ -23,132 +23,139 @@
         margin: 0 70px;
         margin-top: 65px;
         flex-wrap: wrap;
-        background-color: brown;
+        background-color: brown;   
+ 	}
+ 	
+ 	h4 {
+ 		margin: 10px;
  	}
 </style>
        
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
          crossorigin="anonymous"></script>
+         
+<script>
+//더보기 실행함수 **
+moreList(); //함수 호출
+ 
+function moreList() {
+ 
+    var startNum = $("#listBody tr").length;  //마지막 리스트 번호를 알아내기 위해서 tr태그의 length를 구함.
+    var addListHtml = "";  
+    console.log("startNum", startNum); //콘솔로그로 startNum에 값이 들어오는지 확인
+ 
+     $.ajax({
+        url : "/study/getfilmList",
+        type : "post",
+        dataType : "json",
+        data : {"startNum":startNum},
+        
+        success : function(data) {
+            if(data.length < 10){
+                $("#addBtn").remove();   // 더보기 버튼을 div 클래스로 줘야 할 수도 있음
+            }else{
+            var addListHtml ="";
+            if(data.length > 0){
+                
+                for(var i=0; i<data.length;i++) {
+                    var idx = Number(startNum)+Number(i)+1;   
+                    // 글번호 : startNum 이  10단위로 증가되기 때문에 startNum +i (+1은 i는 0부터 시작하므로 )
+                    addListHtml += "<tr>";
+                    addListHtml += "<td>"+ idx + "</td>";
+                    addListHtml += "<td>"+ data[i].title + "</td>";
+                    addListHtml += "<td>"+ data[i].description + "</td>";
+                    addListHtml += "</tr>";
+                }
+                $("#listBody").append(addListHtml);
+            }
+            }
+        }
+    });
+ 
+}
+</script>       
+         
+         
+         
+         
+         
+         
 
 </head>
   <body>
    <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.html"><img src="../images/kkokko.png" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="../images/kkokko.png" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" href="index.html"><img src="../images/kkokko.png" alt="logo" /></a>        
         </div>
         <ul class="nav">
         </ul>
-      </nav>
-      </div>
        <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../images/kkokko.png" alt="logo" /></a>
+            
           </div>
           </nav>
-          </div>
-           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-              <span class="mdi mdi-menu"></span>
-            </button>
-            <ul class="navbar-nav w-100">
-              <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input type="text" class="form-control" placeholder="Search">
-                </form>
-              </li>
-            </ul>
-          </div>
            <!-- partial -->
 		    <div class="card" style="width: 18rem;">
-		  	<img src="../images/bhc.png" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Review</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 		  </div>
-		  <ul class="list-group list-group-flush">
-		    <li class="list-group-item">An item</li>
-		    <li class="list-group-item">A second item</li>
-		    <li class="list-group-item">A third item</li>
-		  </ul>
 		</div>
-	
-	
-	
-	 <div class="row ">
-              <div class="col-12 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Reviews</h4>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>   id   </th>
-                            <th> rating </th>
-                            <th> review </th>
-                            <td> 　   </td>
-                            <td> 　   </td>
-                            <td> 　   </td>
-                            <td> 　   </td>
-							<td> 　   </td>
-
-                          </tr>
-                        </thead>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-			
-              <div class="row">
+             <div class="row">
               <div class="col-md-6 col-xl-4 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                  <!--<img src="../images/bhc.png" class="card-img-top" alt="...">  -->
                     <div class="d-flex flex-row justify-content-between">
                       <h4 class="card-title"> Review </h4>
                     </div>
                     <div class="preview-list">
                       <div class="preview-item border-bottom">
                         <div class="preview-thumbnail">
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        <!-- 리뷰어 프로필 -->
-						<tr th:each="list : ${tableList}">
-                          <img src="../images/head.png" alt="image" class="rounded-circle" />
+                        
+                   <!-- 리뷰어 프로필 -->
+					<tr th:each="list : ${tableList}">
+                      
                        <div class="preview-item-content d-flex flex-grow">
                           <div class="flex-grow">
                             <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">
-                              <span th:text="${list.id}"></span>
-                              </h6>
-                              
+                              <h6 class="preview-subject"> </h6>
                             </div>
                             <p class="text-muted">
+                            <img src="../images/head.png" alt="image" class="rounded-circle" width="100" />
+                            <span th:src="${list.img}" width="40" height="50"></span>
                             <span th:text="${list.id}"></span>
+                            <span th:text="${list.rating}"></span> 　
+                            <span th:text="${list.review}"></span>
+                            <span th:src="${list.img}" width="40" height="50"></span>
                             </p>
                           </div>
                         </div>
-                    
+                        </tr>
+                         <br>
+						  <div class="moreList" onclick="moreView();" align="center">
+						  <hr>
+						  	<a class="moreList" href="javascript:moreContent('more_list', 10);">
+						  		더보기(More)
+						  	</a>
+						  </div>
+                    	</div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                       
+                        
 
 		<!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free 
+              <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
             </div>
           </footer>   
   </body>

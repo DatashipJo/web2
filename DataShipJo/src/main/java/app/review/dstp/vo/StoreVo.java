@@ -1,6 +1,6 @@
 package app.review.dstp.vo;
 
-public class chicken_list_vo
+public class StoreVo
 {
 	private int num;
 	private String store;	
@@ -12,7 +12,7 @@ public class chicken_list_vo
 	private String id;
 	private String review;
 	
-	public chicken_list_vo() {}
+	public StoreVo() {}
 
 	public int getNum() {
 		return num;

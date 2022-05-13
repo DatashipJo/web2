@@ -5,29 +5,29 @@
 <mapper namespace="app.review.dstp.list.ChickenListMapper">
 
 	<select id="getUserById"
-		resultType="app.review.dstp.vo.chicken_list_vo"
+		resultType="app.review.dstp.vo.StoreVo"
 		parameterType="Integer">
 		SELECT num,store,adress,rating
 		FROM ck_store
-		WHERE num = #{num}	
+		WHERE num = #{num}
 	</select>
 	
-	<select id="getChickenList2"
+	<select id="getChickenList"
 		parameterType = "String"
-		resultType="app.review.dstp.vo.chicken_list_vo">
-		SELECT id,review,rating,date,num,fk
-		FROM ck_review where fk = 1 order by num desc limit 0,6
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT num,store,adress,s_rating,img
+      FROM ck_store WHERE adress LIKE '%종로구%'
 	</select>
 	
 	<select id="getDetailList"
-		resultType="app.review.dstp.vo.chicken_list_vo">
-		SELECT title,name,hit,content,nj_url
-		FROM edel_notice
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT id,review,rating,date,num,fk
+      FROM ck_review where fk = 1 order by num desc limit 0,6
 	</select>
 	
 	<!--insert 요소는 resultType 속성이 없어도 생성된 행의 수(정수)가 리턴됨-->
     <insert id="insertUser" 
-    	parameterType="app.review.dstp.vo.chicken_list_vo">
+    	parameterType="app.review.dstp.vo.StoreVo">
     	INSERT INTO edel_notice VALUES(NULL,#{title},#{name},#{content},NULL,NOW(),#{nj_url})
     </insert>
     
@@ -35,7 +35,7 @@
     	DELETE FROM edel_notice WHERE num=#{num}
     </delete>
     
-    <update id="updateNotice" parameterType="app.review.dstp.vo.chicken_list_vo">
+    <update id="updateNotice" parameterType="app.review.dstp.vo.StoreVo">
     	UPDATE edel_notice
     	SET title=#{title}, content=#{content}
     	WHERE num=#{num}
