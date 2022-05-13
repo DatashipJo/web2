@@ -1,17 +1,19 @@
 package app.review.dstp.list;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
-import app.review.dstp.vo.chicken_list_vo;
+import app.review.dstp.vo.StoreVo;
 
 @Mapper
 public interface ChickenListMapper 
 {
-	int insertUser(chicken_list_vo vo);
-	int addAndGetKey(chicken_list_vo vo);
-	chicken_list_vo getUserById(int num);
-	List<chicken_list_vo> getChickenList(String area);
-	int updateUser(chicken_list_vo vo);
-	int deleteUser(int num);
-	chicken_list_vo findWithoutId(chicken_list_vo vo);
+	List<StoreVo> getDetailList(StoreVo paramVo);
+	List<StoreVo> getDetailList2(int num);
+	List<StoreVo> getChickenList();
+	List<StoreVo> getChickenList2();
+	List<StoreVo> getChickenMore(int num);
+	List<StoreVo> getChickenList2(String groupedArea);
+	List<StoreVo> getStore(int num);
+	List<StoreVo> getMoreView(int num);
 }

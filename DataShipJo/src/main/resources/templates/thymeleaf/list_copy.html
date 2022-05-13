@@ -10,7 +10,7 @@
 		background-size: 100%;
 		font-family: 'Open Sans', sans-serif;
 		font-size: 14px;
-		font-weight: 400;  
+		font-weight: 400;   
 	}
 	
 	@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
@@ -190,8 +190,6 @@ ul.imgs li{
     margin: 0;
     transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
 }
-
-
 </style>
 </head>
 <body>
@@ -262,8 +260,8 @@ ul.imgs li{
     	</tr> 	
         <tr th:each="list : ${tableList}">	
 	        <td style="padding-left:5px; padding-top:5px; padding-right:5px;" width=50><a href="#"><img th:src="${list.img}" width="40" height="50"></a></td>
-	        <td style="padding-left:5px; padding-right:5px;" width=50>&nbsp; <span th:text="${list.idx}"></span></td>
-	        <td align="left"><a href="#"><span th:text="${list.store}"></span></a></td>
+	        <td style="padding-left:5px; padding-right:5px;" width=50>&nbsp;<!-- <span th:text="${list.idx}"></span> --></td>
+	        <td align="left"><a th:href="@{/detail/{num}(num = ${list.num})}"><span th:text="${list.store}"></span></a></td>
 	        <td align="right"><img src="../images/치킨로고2.png" width="35" height="35"></td>
 	        <td align="right" width="55" style="padding-right:15px;">&nbsp;<span th:text="${list.s_rating}"></span></td>
         </tr>
@@ -271,4 +269,5 @@ ul.imgs li{
   </table>
 </div> 
 </body>
+
 </html>
