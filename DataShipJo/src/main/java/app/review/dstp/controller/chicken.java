@@ -50,8 +50,9 @@ public class chicken
 	
     @GetMapping("detail/{num}")
     public String go_post(@PathVariable("num") int num, Model m){
-    	m.addAttribute("tableList", dao.getDetailList2(num));
+//    	m.addAttribute("tableList", dao.getDetailList2(num));
     	m.addAttribute("store", dao.getStore(num));
+    	m.addAttribute("num", num);
         return "thymeleaf/list_copy4";
     }
 
@@ -61,16 +62,10 @@ public class chicken
     	return "thymeleaf/list_copy2";
     }
     
-//    @PostMapping(value="/selectAll")
-//    @ResponseBody
-//    public List<StoreVo> selectAll(StoreVo vo) {
-//    	return dao.getChickenList("종로구");
-//    }
-    
     @PostMapping(value="/selectAll")
     @ResponseBody
-    public List<StoreVo> MoreView(@PathVariable("num") int num) {
-    	return dao.getMoreView(num);
+    public List<StoreVo> MoreView(StoreVo paramVo) {
+    	return dao.getDetailList(paramVo);
     }
     
     @GetMapping("/page2")

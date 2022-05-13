@@ -56,7 +56,7 @@
 			FROM ck_store A, ck_review B 
 			WHERE A.num = B.fk and A.num = #{num}
 		) as C
-		where C.rnum limit #{startNum},#{endNum}
+		where C.rnum between #{startNum} and #{endNum}
     </select>
     
     <select id="getMoreView"

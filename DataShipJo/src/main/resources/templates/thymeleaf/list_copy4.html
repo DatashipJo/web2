@@ -247,7 +247,7 @@ ul.imgs li{
         </div>
     </div>
 </nav>
-
+ 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <input type="hidden" name="viewCount" id="viewCount" value="0">
@@ -288,8 +288,10 @@ ul.imgs li{
 </table>
 <hr style="color:gray">
 <div style="font-size:15px; color: white; font-weight:bold; padding-bottom:5px; padding-left:5px;">리뷰</div>  
-<table th:each="list : ${tableList}">
-	<tbody>
+<div id="contentView"></div>
+<!-- 
+<table>
+	<tbody th:each="list : ${tableList}">
 		<tr>
 			<td style="padding-top:5px; padding-left:5px;"><img src="../images/사용자3.png" width="30" height="30"></td>
 			<td width="506">&nbsp;<span th:text="${list.id}"></span></td>
@@ -313,16 +315,21 @@ ul.imgs li{
 			<td style="background:none">&nbsp;</td>
 			<td style="background:none">&nbsp;</td>
 		</tr>
+		
 	</tbody>
 </table>
-  
+  -->
+<form id="serarchForm">
+	<input type="hidden" id="num" name="num" th:value="${num}">
+	<input type="hidden" id="StartNum" name="StartNum" value="1">
+	<input type="hidden" id="endNum" name="endNum" value="5">
+</form>  
+
 <div align="center" style="padding-top:0px;">
 	<hr style="color:gray">
   	<button class="myButton">더보기</button>
 </div>
 </div> 
-
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
@@ -331,26 +338,53 @@ ul.imgs li{
 </script>
 	
 <script>
-$(function () { 
-	$("button").on("click", test); 
+test();
+$(function () { 	
+	$("button").on("click", test);
 });
 	
 function test(){
+	var serData = $('#serarchForm').serialize();
+	//console.log(serData);
 	$.ajax({
-		url : "selectAll",
+		url : "/selectAll",
 		type : 'post',
 		cache : false,
+		data: serData,
 		dataType:'json',
 		success : function(res) {
 			var content = "";
-			console.log(JSON.stringify(res));
+			//console.log(JSON.stringify(res));
 			for(i=0; i<res.length; i++) {
-				content += "<tr>";	
-				content += "    <td><a href='#'><img th:src='"+res[i].img+"'></a></td>";
-				content += "    <td>"+res[i].store+"</td>";
-				content += "</tr>";
+				content += "<table>"
+				content += "	<tbody>"
+				content += "		<tr>";	
+				content += "			<td class='td_1_1'><img class='userImage' src='../images/사용자3.png'></td>";
+				content += "    		<td class='td_1_2'><span>"+res[i].id+"</span></td>";
+				content += "    		<td class='td_1_3'><span class='td_date'>"+res[i].date+"</span></td>";
+				content += "		</tr>"
+				content += "		<tr>";	
+				content += "    		<td class='td_2-1'>&nbsp;</td>";
+				content += "    		<td class='td_2_2'></td>";
+				content += "			<td class='td_2_3'><img class='starImage' src='../images/별.png'><span class='rating_padding'>"+res[i].rating+"</span></td>";
+				content += "		</tr>";
+				content += "		<tr>";	
+				content += "    		<td></td>";
+				content += "    		<td class='td_3_1'>"+res[i].review+"</td>";
+				content += "			<td></td>";
+				content += "		</tr>";
+				content += "		<tr>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "		</tr>";
+				content += "	</tbody>";
+				content += "</table>";
 			};
 			$("#contentView").append(content);
+			//rnum 증가
+			$("#StartNum").val(parseInt($("#StartNum").val())+5);
+			$("#endNum").val(parseInt($("#endNum").val())+5);
 		},
 		error : function() {
 			alert("error");
@@ -359,6 +393,69 @@ function test(){
 }
 </script>
 <style>
+.td_3_1{
+	font-weight: normal;
+	padding-bottom: 5px;
+}
+.rating_padding{
+	padding-right: 5px;
+}
+.td_5_1{
+	background:none;
+}
+.td_1_1{
+	padding-top: 5px; 
+	padding-left: 5px;
+}
+
+.userImage{
+	width: 30px;
+	height: 30px;
+}
+.starImage{
+	width: 20px;
+	height: 20px;
+}
+.td_1_2{
+	width: 501px;
+}
+.td_1_3{
+	padding-right: 5px;
+}
+.td_date{
+	font-size: 13px; 
+	color: #98a4b7;
+}
+.td_2_1{
+	width: 30px;
+}
+.td_2_2{
+	width: 501px; 
+	text-align: right; 
+	padding-right:5px; 
+	font-size: 13px; 
+	color:#98a4b7;
+}
+.td_2_3{
+	text-align: right;
+}
+.star_image{
+	 width: 20px; 
+	 height: 20p; 
+}
+.td_rating{
+	font-size: 13px; 
+	color:#98a4b7; 
+	padding-right:5px; 
+	padding-bottom:5px;
+}
+.td_4_1{
+	 font-weight: normal; 
+	 padding-bottom: 5px;
+}
+
+
+
 .myButton {
 	box-shadow:inset 0px 0px 14px -3px #f2fadc;
 	background:linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
