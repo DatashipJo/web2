@@ -41,7 +41,7 @@ public class chicken
 	public String boot() {
 		return "thymeleaf/bootstrap/boot";
 	} 
-	
+	 
 	@GetMapping("/board/{area}")
     public String board(@PathVariable("area") String area, Model m){
         m.addAttribute("tableList", svc.getChickenList2(area));
