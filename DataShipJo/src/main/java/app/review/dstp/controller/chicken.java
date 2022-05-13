@@ -46,7 +46,7 @@ public class chicken
     public String board(@PathVariable("area") String area, Model m){
         m.addAttribute("tableList", svc.getChickenList2(area));
         return "thymeleaf/list_copy";
-    } 
+    }
 	
     @GetMapping("detail/{num}")
     public String go_post(@PathVariable("num") int num, Model m){
