@@ -221,27 +221,30 @@ ul.imgs li{
 }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawBasic);
 
 function drawBasic() {
+	var m_04 = +document.getElementById("m_2022_04").value;
+ 	var m_03 = +document.getElementById('m_2022_03').value;
+	var m_02 = +document.getElementById('m_2022_02').value;
+	var m_01 = +document.getElementById('m_2022_01').value;
+	var m_12 = +document.getElementById('m_2021_12').value;
 
-      var data = google.visualization.arrayToDataTable([
+   	  var data = google.visualization.arrayToDataTable([
         ['Months', 'Reviews Counts'],
-        ['2022-04', 400],
-        ['2022-03', 300],
-        ['2022-02', 200],
-        ['2022-01', 100],
-        ['2021-12', 50]
+        ['2022-04', m_04],
+        ['2022-03', m_03],
+        ['2022-02', m_02],
+        ['2022-01', m_01],
+        ['2021-12', m_12]
       ]);
-
       var options = {
-        title: '5Months Reviews',
+        title: '2021.12 ~ 2022.04 리뷰수 증가율',
         chartArea: {width: '450'},
         hAxis: {
-          title: 'Reviews',
+          title: '',
           minValue: 0
         },
         vAxis: {
@@ -255,7 +258,16 @@ function drawBasic() {
     }
 </script>
 </head>
-<body>
+<body style="background:#101322;">
+
+<form id="drawBasic" th:each="m : ${months}">
+	<input type="hidden" id="m_2022_04" name="m_2022_04" th:value=${m.m_2022_04}>
+	<input type="hidden" id="m_2022_03" name="m_2022_03" th:value=${m.m_2022_03}>
+	<input type="hidden" id="m_2022_02" name="m_2022_02" th:value=${m.m_2022_02}>
+	<input type="hidden" id="m_2022_01" name="m_2022_01" th:value=${m.m_2022_01}>
+	<input type="hidden" id="m_2021_12" name="m_2021_12" th:value=${m.m_2021_12}>
+</form>  
+
 <th:block th:include="@{/fragments/nav}"></th:block>
  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -263,7 +275,7 @@ function drawBasic() {
 <input type="hidden" name="viewCount" id="viewCount" value="0">
 <input type="hidden" name="startCount" id="startCount" value="0">
 <div id="wrapper">
-  <h1>종로구 '치킨' 랭킹</h1>  
+  <h1>[[${area}]] '치킨' 랭킹</h1>  
   <table id="keywords" cellspacing="0" cellpadding="0">
     <thead>
     	<tr>
@@ -290,37 +302,48 @@ function drawBasic() {
    <h3 class="title-kr" th:each="ck : ${store}"><span th:text="${ck.store}"></span></h3>
    <div id="map" style="width:100%;height:350px;"></div>
    <h4 class="title-en" th:each="ck : ${store}"><span th:text="${ck.adress}"></span></h4>
-   
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=76634b4780c4d4ec1d4c1dd6432fb28d"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+ 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a044e09620e27601b09f43e9d02ac63c&libraries=services"></script>	
+<script th:inline="javascript">
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
 
-		var map = new kakao.maps.Map(container, options);
-		
-		var geocoder = new kakao.maps.services.Geocoder();
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-		geocoder.addressSearch('<%={ck.store}%>', function (result, status) {
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
 
-			if (status === kakao.maps.services.Status.OK) {
+//주소로 좌표를 검색합니다
+geocoder.addressSearch("[[${MapStore}]]", function(result, status) {
 
-				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
 
-				var marker = new kakao.maps.Marker({
-					map: map, position: coords 
-					});
-				map.setCenter(coords);
-				}
-			var marker = new kakao.maps.Marker({
-				position: map.getCenter() 
-		    });
-			marker.setMap(map);
-			});
-	</script>
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    /* 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px; text-align:center; padding:6px 0; font-weight:bold">치킨</div>'
+    });
+    infowindow.open(map, marker); */
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});    
+</script>
    
 <table th:each="ck : ${store}">
 	<tr>
@@ -328,70 +351,21 @@ function drawBasic() {
  		<td align="right" width="40" style="padding-right:15px; background:#101322;"><span th:text="${ck.s_rating}"></span></td>
  	</tr>
 </table>
+
 <hr style="color:gray">
-
-<!-- 
-<p class="p_tag" align="right">
-<select class="select_tag" id="test" name="test" onchange="OnChange();">
-			<option value="Years" style="border:3px solid gray; font-weight: bold; background: #101322;">Years</option>
-			<option value="Month" style="border:3px solid gray; font-weight: bold; background: #101322;">Months</option>
-</select>
-</p>
- -->
-
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <p id="chart_div"></p>
 
-
-
 <hr style="color:gray">
 <div style="font-size:15px; color: white; font-weight:bold; padding-bottom:5px; padding-left:5px;">리뷰</div>  
 <div id="contentView"></div>
-<!-- 
-<table>
-	<tbody th:each="list : ${tableList}">
-		<tr>
-			<td style="padding-top:5px; padding-left:5px;"><img src="../images/사용자3.png" width="30" height="30"></td>
-			<td width="506">&nbsp;<span th:text="${list.id}"></span></td>
-			<td style="padding-right:5px"><span style="font-size: 13px; color:#98a4b7;" th:text="${list.date}"></span></td>
-		</tr>
-		<tr>
-			<td width="30">&nbsp;</td>
-			<td width="506" style="text-align:right; padding-right:5px; font-size: 13px; color:#98a4b7"></td>
-			<td style="text-align:right">
-				<img src="../images/별.png" width="20" height="20">
-				<span style="font-size: 13px; color:#98a4b7; padding-right:5px; padding-bottom:5px;"th:text="${list.rating}"></span>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td style="font-weight:normal; padding-bottom:5px;"><span th:text="${list.review}"></span></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td style="background:none">&nbsp;</td>
-			<td style="background:none">&nbsp;</td>
-			<td style="background:none">&nbsp;</td>
-		</tr>
-		
-	</tbody>
-</table>
-  -->
+
 <form id="serarchForm">
 	<input type="hidden" id="num" name="num" th:value="${num}">
 	<input type="hidden" id="StartNum" name="StartNum" value="1">
 	<input type="hidden" id="endNum" name="endNum" value="5">
 </form>  
-
-<form id="drawBasic">
-	<input type="hidden" id="2022-04" name="2022-04" th:value="${m_2022_04}">
-	<input type="hidden" id="2022-03" name="2022-03" th:value="${m_2022_03}">
-	<input type="hidden" id="2022-02" name="2022-02" th:value="${m_2022_02}">
-	<input type="hidden" id="2022-01" name="2022-01" th:value="${m_2022_01}">
-	<input type="hidden" id="2021-12" name="2021-12" th:value="${m_2021_12}">
-</form>
-
 
 <div align="center" style="padding-top:0px;">
 	<hr style="color:gray">
@@ -469,7 +443,7 @@ function test(){
 }
 .rating_padding{
 	padding-right: 5px;
-	vertical-align: top;
+	vertical-align: middle;
 }
 .td_5_1{
 	background:none;

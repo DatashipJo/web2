@@ -16,23 +16,7 @@ public class StoreService {
     @Autowired
     private StoreDao dao;
     
-    public List<StoreIdxVo> getChickenList(String area ){
-        List<StoreVo> dbList = dao.getChickenList(area);
-        List<StoreIdxVo> newList = new ArrayList<StoreIdxVo>();
-        for ( int i=0 ; i < dbList.size(); i++ ) {
-            StoreIdxVo newVo = new StoreIdxVo();
-            newVo.setIdx(i+1);
-            newVo.setNum(dbList.get(i).getNum());
-            newVo.setStore(dbList.get(i).getStore());
-            newVo.setImg(dbList.get(i).getImg());
-            newVo.setAdress(dbList.get(i).getAdress());
-            newVo.setS_rating(dbList.get(i).getS_rating());
-            newList.add(newVo);
-        }
-        return newList;
-    }
-    
-    public List<StoreVo> getChickenList2(String area){
+    public List<StoreIdxVo> getChickenList2(String area){
 
     	String groupedArea = null;
         switch (area){
@@ -54,7 +38,19 @@ public class StoreService {
             	break;
             	
         }
-        return dao.getChickenList_area2(groupedArea);
+        List<StoreVo> dbList = dao.getChickenList_area2(groupedArea);
+        List<StoreIdxVo> newList = new ArrayList<StoreIdxVo>();
+        for ( int i=0 ; i < dbList.size(); i++ ) {
+            StoreIdxVo newVo = new StoreIdxVo();
+            newVo.setIdx(i+1);
+            newVo.setNum(dbList.get(i).getNum());
+            newVo.setStore(dbList.get(i).getStore());
+            newVo.setImg(dbList.get(i).getImg());
+            newVo.setAdress(dbList.get(i).getAdress());
+            newVo.setS_rating(dbList.get(i).getS_rating());
+            newList.add(newVo);
+        }
+        return newList;
     }
 
     public String getGroupedArea(String area){
@@ -80,6 +76,14 @@ public class StoreService {
         }
         return groupedArea;
     }
+    
+//    public String test(String d) {
+//    	String test = null;
+//    	switch(d) {
+//    	case "[[${test}]]" : test = "'2022-04', 27" ;
+//    	}
+//    	return test;
+//    }
 
 
 }// end C

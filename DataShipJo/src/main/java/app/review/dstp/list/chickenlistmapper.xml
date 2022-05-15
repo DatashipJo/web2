@@ -4,38 +4,6 @@
         
 <mapper namespace="app.review.dstp.list.ChickenListMapper">
 
-	<select id="getUserById"
-		resultType="app.review.dstp.vo.StoreVo"
-		parameterType="Integer">
-		SELECT num,store,adress,rating
-		FROM ck_store
-		WHERE num = #{num}
-	</select>
-<!--
-<<<<<<< HEAD
-	<select id="getChickenList"
-		parameterType = "String"
-		resultType="app.review.dstp.vo.StoreVo">
-		SELECT num,store,adress,s_rating,img
-      FROM ck_store WHERE adress LIKE '%종로구%'
-=======  -->
-	<select id="getChickenTest"
-		resultType = "app.review.dstp.vo.StoreVo">
-		SELECT JSON_OBJECT('id',id, 'date', date, 'rating', rating, 'review', review) FROM ck_review;
-	</select>
-<!--	
-<<<<<<< HEAD
-	<select id="getDetailList"
-		resultType="app.review.dstp.vo.StoreVo">
-		SELECT id,review,rating,date,num,fk
-      FROM ck_review where fk = 1 order by num desc limit 0,6
-=======  -->
-	<select id="getChickenMore"
-		parameterType = "integer"
-		resultType="app.review.dstp.vo.StoreVo">
-		SELECT * FROM ck_review where fk = #{num}
-	</select>
-	
 	<select id="getChickenList"
 		parameterType = "String"
 		resultType="app.review.dstp.vo.StoreVo">
@@ -79,31 +47,29 @@
         FROM ck_store A, ck_review B 
         WHERE A.num = B.fk and A.num = #{num};
     </select>
+    
+    <select id="getChickenDate"
+    	parameterType="integer"
+    	resultType="app.review.dstp.vo.DateVo">
+    	SELECT m_2022_04, m_2022_03, m_2022_02, m_2022_01, m_2021_12 FROM ck_date WHERE fk = #{num}
+    </select>
 	
 	<select id="getStore"
 		parameterType="integer"
 		resultType="app.review.dstp.vo.StoreVo">
 		SELECT store,adress,s_rating FROM ck_store WHERE num = #{num};
-
-		SELECT store,adress,s_rating FROM ck_store WHERE num = #{num}
-
-		SELECT store,adress,s_rating FROM ck_store WHERE num = #{num};
-
 	</select>
 	
-	<!--insert 요소는 resultType 속성이 없어도 생성된 행의 수(정수)가 리턴됨-->
-    <insert id="insertUser" 
-    	parameterType="app.review.dstp.vo.StoreVo">
-    	INSERT INTO edel_notice VALUES(NULL,#{title},#{name},#{content},NULL,NOW(),#{nj_url})
-    </insert>
+	<select id="getMapStore"
+		parameterType="integer"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT store FROM ck_store WHERE num = #{num};
+	</select>
+	
+	<select id="getMapAdress"
+		parameterType="integer"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT adress FROM ck_store WHERE num = #{num};
+	</select>
     
-    <delete id="deleteUser" parameterType="Integer">
-    	DELETE FROM edel_notice WHERE num=#{num}
-    </delete>
-    
-    <update id="updateNotice" parameterType="app.review.dstp.vo.StoreVo">
-    	UPDATE edel_notice
-    	SET title=#{title}, content=#{content}
-    	WHERE num=#{num}
-    </update>
 </mapper>

@@ -34,10 +34,6 @@ public class StoreDao {
 		return clm.getChickenList2(groupedArea);
 	}
 	
-	public List<StoreVo> getStore(int num){
-		return clm.getStore(num);
-	}
-	
 	public List<StoreVo> getMoreView(int num){
 		return clm.getMoreView(num);
 	}
@@ -53,6 +49,18 @@ public class StoreDao {
 	
 	public List<DateVo> getChickenDate(int num){
 		return clm.getChickenDate(num);
+	}
+	
+	public String getMapStore(int num){
+		return clm.getMapStore(num);
+	}
+	
+	public String getMapAdress(int num){
+		return clm.getMapAdress(num);
+	}
+	
+	public List<StoreVo> getStore(int num){
+		return clm.getStore(num);
 	}
 
 }
