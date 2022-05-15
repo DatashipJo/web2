@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DataShipJo:war">
+    <output-path>$PROJECT_DIR$/DataShipJo/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>DataShipJo</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="DataShipJo-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="DataShipJo:war exploded" />
+    </root>
+  </artifact>
+</component>

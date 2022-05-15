@@ -31,10 +31,9 @@ public interface ChickenListMapper
 	List<StoreVo> getChickenList2(String groupedArea);
 	List<StoreVo> getStore(int num);
 	List<StoreVo> getMoreView(int num);
-<<<<<<< HEAD
+
 	List<StoreVo> getDetailList(StoreVo paramVo);
 
-=======
 	List<DateVo> getChickenDate(int num);
->>>>>>> branch 'main' of https://github.com/DatashipJo/web2.git
+
 }

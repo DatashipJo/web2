@@ -25,7 +25,7 @@ import app.review.dstp.vo.DateVo;
 
 @Controller
 @RequestMapping("/")
-public class chicken 
+public class chicken
 {
 
 	@Autowired
@@ -33,11 +33,12 @@ public class chicken
 
 	@Autowired
 	private StoreDao dao;
-	
+
 	@GetMapping("/")
 	public String main() {
 		return "thymeleaf/seoul";
 	}
+
 
 	/*
 	@GetMapping("/pagepage")
@@ -84,14 +85,14 @@ public class chicken
 	@GetMapping("/boot")
 	public String boot() {
 		return "thymeleaf/bootstrap/boot";
-	} 
-	 
+	}
+/*0515
 	@GetMapping("/board/{area}")
     public String board(@PathVariable("area") String area, Model m){
         m.addAttribute("tableList", svc.getChickenList2(area));
         return "thymeleaf/chicken_list";
     }
-
+*/
 	/*
 <<<<<<< HEAD
 	
@@ -135,15 +136,33 @@ public class chicken
     public List<StoreVo> MoreView(StoreVo paramVo) {
     	return dao.getDetailList(paramVo);
     }
-<<<<<<< HEAD
 
-=======
-    
+	public String board(@PathVariable("area") String area, Model m){
+		m.addAttribute("tableList", svc.getChickenList2(area));
+		m.addAttribute("area", svc.getGroupedArea(area));
+		return "thymeleaf/chicken_list";
+	}
+/*
+	@GetMapping("detail/{num}")
+	public String go_post(@PathVariable("num") int num, Model m){
+//       m.addAttribute("tableList", dao.getDetailList2(num));
+		m.addAttribute("store", dao.getStore(num));
+		m.addAttribute("num", num);
+		m.addAttribute("months", dao.getChickenDate(num));
+		return "thymeleaf/chicken_detail";
+	}
+/*
+	@PostMapping(value="/selectAll")
+	@ResponseBody
+	public List<StoreVo> MoreView(StoreVo paramVo) {
+		return dao.getDetailList(paramVo);
+	}
+*/
 //    @PostMapping(value="/click")
 //    @ResponseBody
 //    public List<DateVo> dateReview(DateVo paramVo){
-//    	return dao.getChickenDate(paramVo);
+//       return dao.getChickenDate(paramVo);
 //    }
-    
->>>>>>> branch 'main' of https://github.com/DatashipJo/web2.git
+
+
 }
