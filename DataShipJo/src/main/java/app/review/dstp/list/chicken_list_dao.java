@@ -24,7 +24,7 @@ public class chicken_list_dao {
 		if (area == "jongno"){
 			res = "종로구";
 		}
-		return clm.getChickenList(res);
+		return clm.getChickenList();
 	}
 	
 

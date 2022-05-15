@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>치킨 상세페이지</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+	body {		
+		background: #101322;
+		background-size: 100%;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 400;   
+	}
+	
+	@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+	@import url('https://fonts.googleapis.com/css?family=Amarante');
+
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+ 		margin: 0;
+  		padding: 0;
+  		border: 0;
+  		font-size: 100%;
+  		font: inherit;
+		vertical-align: baseline;
+		outline: none;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+html{
+	overflow-y: scroll; 
+}
+
+::selection { background: #5f74a0; color: #fff; }
+::-moz-selection { background: #5f74a0; color: #fff; }
+::-webkit-selection { background: #5f74a0; color: #fff; }
+
+br{
+	display: block; line-height: 1.6em; 
+} 
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+
+input, textarea { 
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: none; 
+}
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong, b { font-weight: bold; } 
+
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; max-width: 100%; }
+
+h1{ 
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 1.5em;
+	margin-bottom: 10px;
+	color: white;
+	background: none;
+	padding-bottom: 0px;
+}
+
+/** page structure **/
+#wrapper{
+	padding: 50px;
+    display: block;
+    width: 750px;
+    margin: 0 auto;
+}
+
+#keywords {
+	margin: 0 auto;
+	font-size: 18px;
+	width: 650px;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+
+td{
+	font-family: sans-serif;
+	background: #172036;
+	color: white;
+	font-weight: 550;
+	padding: 0px;
+	margin: 0px;
+}
+
+th, td {
+	vertical-align : middle;
+}
+
+.slider{
+    width: 650px;
+    height: 210px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.slider input[type=radio]{
+    display: none;
+}
+
+ul.imgs{
+    padding: 0;
+    margin: 0;
+}
+
+ul.imgs li{
+    position: absolute; /* 슬라이드가 겹쳐서 모여야 하므로 absolute 속성으로 배치 */
+    opacity: 0; /* 체크한 라디오박스 순서의 슬라이드만 표시되도록 기본 투명도 설정 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bullets{
+    position: absolute;
+    left: 50%; /* 가로로 가운데 정렬 */
+    transform: translateX(-50%);
+    bottom: 20px; /* 슬라이드 밑에서 20px 간격 띄움 */
+    z-index: 2; /* 슬라이드 위에 보이도록 레이어 순위를 높임 */
+}
+.bullets label{
+    display: inline-block; /* 한 줄로 불릿 나열*/
+    border-radius: 50%; /* 원형 불릿으로 처리 */
+    background-color: rgba(0,0,0,0.55);
+    width: 20px; /* 불릿 너비 */
+    height: 20px; /* 불릿 높이 */
+    cursor: pointer;
+}
+
+.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
+    background-color: #fff;
+}
+
+.slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1){
+    opacity: 1;
+    transition: 1s;
+    z-index: 1;
+}
+.slider input[type=radio]:nth-child(2):checked~ul.imgs>li:nth-child(2){
+    opacity: 1;
+    transition: 1s;
+    z-index: 1;
+}
+.slider input[type=radio]:nth-child(3):checked~ul.imgs>li:nth-child(3){
+    opacity: 1;
+    transition: 1s;
+    z-index: 1;
+}
+.slider input[type=radio]:nth-child(4):checked~ul.imgs>li:nth-child(4){
+    opacity: 1;
+    transition: 1s;
+    z-index: 1;
+}
+
+ul.imgs li{
+    position: absolute;
+    opacity: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
+}
+
+.title-kr {
+    font-size: 20px;
+    margin-top: 6px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #efefef;
+    letter-spacing: -.4px;
+}
+
+.title-en {
+    font-size: 12px;
+    font-weight: 400;
+    color: #98a4b7;
+    line-height: 20px;
+    letter-spacing: -.1px;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">대동치킨여지도</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+            <div class=" col-lg-6">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+ 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<input type="hidden" name="viewCount" id="viewCount" value="0">
+<input type="hidden" name="startCount" id="startCount" value="0">
+<div id="wrapper">
+  <h1>종로구 '치킨' 랭킹</h1>  
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+    	<tr>
+		    <div class="slider">
+		    	<input type="radio" name="slide" id="slide1" checked>
+		    	<input type="radio" name="slide" id="slide2">
+		    	<input type="radio" name="slide" id="slide3">
+		    	<input type="radio" name="slide" id="slide4">
+		    		<ul id="imgholder" class="imgs">
+		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드1.png"></li>
+		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드2.png"></li>
+		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드3.png"></li>
+		    		</ul>
+		    <div class="bullets">
+		        <label for="slide1">&nbsp;</label>
+		        <label for="slide2">&nbsp;</label>
+		        <label for="slide3">&nbsp;</label>
+		    </div>
+			</div>
+    	</tr> 	
+    </thead>
+  </table>
+<hr style="color:gray">
+   <h3 class="title-kr" th:each="ck : ${store}"><span th:text="${ck.store}"></span></h3>
+   <div id="map" style="width:100%;height:350px;"></div>
+   <h4 class="title-en" th:each="ck : ${store}"><span th:text="${ck.adress}"></span></h4>
+   
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=76634b4780c4d4ec1d4c1dd6432fb28d"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		geocoder.addressSearch('<%={ck.store}%>', function (result, status) {
+
+			if (status === kakao.maps.services.Status.OK) {
+
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+				var marker = new kakao.maps.Marker({
+					map: map, position: coords 
+					});
+				map.setCenter(coords);
+				}
+			var marker = new kakao.maps.Marker({
+				position: map.getCenter() 
+		    });
+			marker.setMap(map);
+			});
+	</script>
+   
+<table th:each="ck : ${store}">
+	<tr>
+ 		<td style="background:#101322;"><img src="../images/치킨로고2.png" width="35" height="35"></td>
+ 		<td align="right" width="40" style="padding-right:15px; background:#101322;"><span th:text="${ck.s_rating}"></span></td>
+ 	</tr>
+</table>
+<hr style="color:gray">
+<div style="font-size:15px; color: white; font-weight:bold; padding-bottom:5px; padding-left:5px;">리뷰</div>  
+<div id="contentView"></div>
+<!-- 
+<table>
+	<tbody th:each="list : ${tableList}">
+		<tr>
+			<td style="padding-top:5px; padding-left:5px;"><img src="../images/사용자3.png" width="30" height="30"></td>
+			<td width="506">&nbsp;<span th:text="${list.id}"></span></td>
+			<td style="padding-right:5px"><span style="font-size: 13px; color:#98a4b7;" th:text="${list.date}"></span></td>
+		</tr>
+		<tr>
+			<td width="30">&nbsp;</td>
+			<td width="506" style="text-align:right; padding-right:5px; font-size: 13px; color:#98a4b7"></td>
+			<td style="text-align:right">
+				<img src="../images/별.png" width="20" height="20">
+				<span style="font-size: 13px; color:#98a4b7; padding-right:5px; padding-bottom:5px;"th:text="${list.rating}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td style="font-weight:normal; padding-bottom:5px;"><span th:text="${list.review}"></span></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td style="background:none">&nbsp;</td>
+			<td style="background:none">&nbsp;</td>
+			<td style="background:none">&nbsp;</td>
+		</tr>
+		
+	</tbody>
+</table>
+  -->
+<form id="serarchForm">
+	<input type="hidden" id="num" name="num" th:value="${num}">
+	<input type="hidden" id="StartNum" name="StartNum" value="1">
+	<input type="hidden" id="endNum" name="endNum" value="5">
+</form>  
+
+<div align="center" style="padding-top:0px;">
+	<hr style="color:gray">
+  	<button class="myButton">더보기</button>
+</div>
+</div> 
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+	crossorigin="anonymous">
+</script>
+	
+<script>
+test();
+$(function () { 	
+	$("button").on("click", test);
+});
+	
+function test(){
+	var serData = $('#serarchForm').serialize();
+	//console.log(serData);
+	$.ajax({
+		url : "/selectAll",
+		type : 'post',
+		cache : false,
+		data: serData,
+		dataType:'json',
+		success : function(res) {
+			var content = "";
+			//console.log(JSON.stringify(res));
+			for(i=0; i<res.length; i++) {
+				content += "<table>"
+				content += "	<tbody>"
+				content += "		<tr>";	
+				content += "			<td class='td_1_1'><img class='userImage' src='../images/사용자3.png'></td>";
+				content += "    		<td class='td_1_2'><span>"+res[i].id+"</span></td>";
+				content += "    		<td class='td_1_3'><span class='td_date'>"+res[i].date+"</span></td>";
+				content += "		</tr>"
+				content += "		<tr>";	
+				content += "    		<td class='td_2-1'>&nbsp;</td>";
+				content += "    		<td class='td_2_2'></td>";
+				content += "			<td class='td_2_3'><img class='starImage' src='../images/별.png'><span class='rating_padding'>"+res[i].rating+"</span></td>";
+				content += "		</tr>";
+				content += "		<tr>";	
+				content += "    		<td></td>";
+				content += "    		<td class='td_3_1'>"+res[i].review+"</td>";
+				content += "			<td></td>";
+				content += "		</tr>";
+				content += "		<tr>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "			<td class='td_5_1'>&nbsp;</td>";
+				content += "		</tr>";
+				content += "	</tbody>";
+				content += "</table>";
+			};
+			$("#contentView").append(content);
+			//rnum 증가
+			$("#StartNum").val(parseInt($("#StartNum").val())+5);
+			$("#endNum").val(parseInt($("#endNum").val())+5);
+		},
+		error : function() {
+			alert("error");
+		}
+	});
+}
+</script>
+<style>
+.td_3_1{
+	font-weight: normal;
+	padding-bottom: 5px;
+}
+.rating_padding{
+	padding-right: 5px;
+}
+.td_5_1{
+	background:none;
+}
+.td_1_1{
+	padding-top: 5px; 
+	padding-left: 5px;
+}
+
+.userImage{
+	width: 30px;
+	height: 30px;
+}
+.starImage{
+	width: 20px;
+	height: 20px;
+}
+.td_1_2{
+	width: 501px;
+}
+.td_1_3{
+	padding-right: 5px;
+}
+.td_date{
+	font-size: 13px; 
+	color: #98a4b7;
+}
+.td_2_1{
+	width: 30px;
+}
+.td_2_2{
+	width: 501px; 
+	text-align: right; 
+	padding-right:5px; 
+	font-size: 13px; 
+	color:#98a4b7;
+}
+.td_2_3{
+	text-align: right;
+}
+.star_image{
+	 width: 20px; 
+	 height: 20p; 
+}
+.td_rating{
+	font-size: 13px; 
+	color:#98a4b7; 
+	padding-right:5px; 
+	padding-bottom:5px;
+}
+.td_4_1{
+	 font-weight: normal; 
+	 padding-bottom: 5px;
+}
+
+
+
+.myButton {
+	box-shadow:inset 0px 0px 14px -3px #f2fadc;
+	background:linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
+	background-color:#dbe6c4;
+	border-radius:6px;
+	border:1px solid #b2b8ad;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ced9bf;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #9ba892 5%, #dbe6c4 100%);
+	background-color:#9ba892;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+</style>
+</html>

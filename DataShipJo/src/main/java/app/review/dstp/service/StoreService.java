@@ -1,9 +1,10 @@
-package app.review.dstp.svc;
+package app.review.dstp.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 import app.review.dstp.list.StoreDao;
@@ -11,7 +12,7 @@ import app.review.dstp.vo.StoreIdxVo;
 import app.review.dstp.vo.StoreVo;
 
 @Service
-public class chicken_svc {
+public class StoreService {
 
     @Autowired
     private StoreDao dao;
@@ -34,7 +35,7 @@ public class chicken_svc {
     
     public List<StoreVo> getChickenList2(String area){
 
-       String groupedArea = null;
+    	String groupedArea = null;
         switch (area){
             case "jongno":  groupedArea = "%종로구%' or adress Like '%중구%";
                 break;
@@ -43,15 +44,15 @@ public class chicken_svc {
             case "kangseo":  groupedArea = "%강서구%' or adress Like '%양천구%";
                 break;
             case "seodaemoon": groupedArea = "%서대문구%' or adress Like '%마포구%' or adress Like '%은평구%";
-               break;
+            	break;
             case "kangbook": groupedArea = "%도봉구%' or adress Like '%노원구%";
-               break;
+            	break;
             case "yungdeungpo": groupedArea = "%영등포구' or adress Like '%동작구%' or adress Like '%관악구%' or adress Like '%금천구%";
-               break;
+            	break;
             case "kangnam": groupedArea = "%강남구' or adress Like '%서초구%";
-               break;
+            	break;
             case "kangdong": groupedArea = "%강동구' or adress Like '%송파구%";
-               break;
+            	break;
         }
         return dao.getChickenList_area2(groupedArea);
     }
