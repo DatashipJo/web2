@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 import app.review.dstp.list.StoreDao;
@@ -53,6 +52,7 @@ public class StoreService {
             	break;
             case "kangdong": groupedArea = "%강동구' or adress Like '%송파구%";
             	break;
+            	
         }
         return dao.getChickenList_area2(groupedArea);
     }

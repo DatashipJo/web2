@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import app.review.dstp.list.StoreDao;
 import app.review.dstp.service.StoreService;
 import app.review.dstp.vo.StoreVo;
+import app.review.dstp.vo.DateVo;
 
 @Controller
 @RequestMapping("/")
@@ -47,6 +48,7 @@ public class chicken
 //    	m.addAttribute("tableList", dao.getDetailList2(num));
     	m.addAttribute("store", dao.getStore(num));
     	m.addAttribute("num", num);
+    	m.addAttribute("months", dao.getChickenDate(num));
         return "thymeleaf/chicken_detail";
     }
     
@@ -55,4 +57,11 @@ public class chicken
     public List<StoreVo> MoreView(StoreVo paramVo) {
     	return dao.getDetailList(paramVo);
     }
+    
+//    @PostMapping(value="/click")
+//    @ResponseBody
+//    public List<DateVo> dateReview(DateVo paramVo){
+//    	return dao.getChickenDate(paramVo);
+//    }
+    
 }

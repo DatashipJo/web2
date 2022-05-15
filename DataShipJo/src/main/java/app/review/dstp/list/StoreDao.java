@@ -1,11 +1,11 @@
 package app.review.dstp.list;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import app.review.dstp.vo.DateVo;
 import app.review.dstp.vo.StoreVo;
 
 @Repository
@@ -49,6 +49,10 @@ public class StoreDao {
 	public List<StoreVo> getDetailList2(int num) {
 
 		return clm.getDetailList2(num);
+	}
+	
+	public List<DateVo> getChickenDate(int num){
+		return clm.getChickenDate(num);
 	}
 
 }
