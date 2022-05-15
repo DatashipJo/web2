@@ -46,14 +46,40 @@ public class StoreService {
             	break;
             case "kangbook": groupedArea = "%도봉구%' or adress Like '%노원구%";
             	break;
-            case "yungdeungpo": groupedArea = "%영등포구' or adress Like '%동작구%' or adress Like '%관악구%' or adress Like '%금천구%";
+            case "yungdeungpo": groupedArea = "%영등포구%' or adress Like '%동작구%' or adress Like '%관악구%' or adress Like '%금천구%";
             	break;
-            case "kangnam": groupedArea = "%강남구' or adress Like '%서초구%";
+            case "kangnam": groupedArea = "%강남구%' or adress Like '%서초구%";
             	break;
-            case "kangdong": groupedArea = "%강동구' or adress Like '%송파구%";
+            case "kangdong": groupedArea = "%강동구%' or adress Like '%송파구%";
             	break;
             	
         }
         return dao.getChickenList_area2(groupedArea);
     }
-}
+
+    public String getGroupedArea(String area){
+        String groupedArea = null;
+        switch (area){
+            case "jongno":  groupedArea = "종로구";
+                break;
+            case "dongdaemoon":  groupedArea = "동대문구";
+                break;
+            case "kangseo":  groupedArea = "강서구";
+                break;
+            case "seodaemoon": groupedArea = "서대문구";
+                break;
+            case "kangbook": groupedArea = "도봉구";
+                break;
+            case "yungdeungpo": groupedArea = "영등포구";
+                break;
+            case "kangnam": groupedArea = "강남구";
+                break;
+            case "kangdong": groupedArea = "강동구";
+                break;
+
+        }
+        return groupedArea;
+    }
+
+
+}// end C

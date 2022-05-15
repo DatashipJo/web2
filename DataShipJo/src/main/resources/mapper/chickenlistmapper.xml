@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="app.review.dstp.list.ChickenListMapper">
+
+	<select id="getUserById"
+			resultType="app.review.dstp.vo.StoreVo"
+			parameterType="Integer">
+		SELECT num,store,adress,rating
+		FROM ck_store
+		WHERE num = #{num}
+	</select>
+
+	<select id="getChickenTest"
+			resultType = "app.review.dstp.vo.StoreVo">
+		SELECT JSON_OBJECT('id',id, 'date', date, 'rating', rating, 'review', review) FROM ck_review;
+	</select>
+
+	<select id="getChickenMore"
+			parameterType = "integer"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT * FROM ck_review where fk = #{num}
+	</select>
+
+	<select id="getChickenList"
+			parameterType = "String"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT num,store,adress,s_rating,img
+		FROM ck_store
+	</select>
+
+	<select id="getChickenList2"
+			parameterType = "String"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT num,store,adress,s_rating,img
+		FROM ck_store WHERE adress LIKE '${groupedArea}'
+	</select>
+
+	<select id="getDetailList2"
+			parameterType="integer"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT A.* , B.*
+		FROM ck_store A, ck_review B
+		WHERE A.num = B.fk and A.num = #{num} order by B.num limit 0,5
+	</select>
+
+	<select id="getDetailList"
+			parameterType="app.review.dstp.vo.StoreVo"
+			resultType="app.review.dstp.vo.StoreVo">
+		select C.*
+		from (
+				 SELECT row_number() over(order by B.date desc) as rnum,
+						 A.store, A.adress, A.s_rating,
+						B.rating, B.date, B.id, B.review
+				 FROM ck_store A, ck_review B
+				 WHERE A.num = B.fk and A.num = #{num}
+			 ) as C
+		where C.rnum between #{startNum} and #{endNum}
+	</select>
+
+	<select id="getMoreView"
+			parameterType="integer"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT A.* , B.*
+		FROM ck_store A, ck_review B
+		WHERE A.num = B.fk and A.num = #{num}
+	</select>
+
+	<select id="getChickenDate"
+			parameterType="integer"
+			resultType="app.review.dstp.vo.DateVo">
+		SELECT * FROM ck_date where fk = #{num}
+	</select>
+
+	<select id="getStore"
+			parameterType="integer"
+			resultType="app.review.dstp.vo.StoreVo">
+		SELECT store,adress,s_rating FROM ck_store WHERE num = #{num}
+	</select>
+
+</mapper>
