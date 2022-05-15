@@ -21,6 +21,7 @@ import app.review.dstp.svc.chicken_svc;
 import app.review.dstp.list.StoreDao;
 import app.review.dstp.service.StoreService;
 import app.review.dstp.vo.StoreVo;
+import app.review.dstp.vo.DateVo;
 
 @Controller
 @RequestMapping("/")
@@ -125,6 +126,7 @@ public class chicken
 //    	m.addAttribute("tableList", dao.getDetailList2(num));
     	m.addAttribute("store", dao.getStore(num));
     	m.addAttribute("num", num);
+    	m.addAttribute("months", dao.getChickenDate(num));
         return "thymeleaf/chicken_detail";
     }
     
@@ -133,5 +135,15 @@ public class chicken
     public List<StoreVo> MoreView(StoreVo paramVo) {
     	return dao.getDetailList(paramVo);
     }
+<<<<<<< HEAD
 
+=======
+    
+//    @PostMapping(value="/click")
+//    @ResponseBody
+//    public List<DateVo> dateReview(DateVo paramVo){
+//    	return dao.getChickenDate(paramVo);
+//    }
+    
+>>>>>>> branch 'main' of https://github.com/DatashipJo/web2.git
 }

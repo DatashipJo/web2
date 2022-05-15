@@ -206,7 +206,54 @@ ul.imgs li{
     line-height: 20px;
     letter-spacing: -.1px;
 }
+
+.select_tag{
+	border: 4px solid gray;
+	border-radius: 2px 2px 2px 2px;
+	background: none;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+}
+
+.p_tag{
+	padding-bottom: 5px;
+}
 </style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Months', 'Reviews Counts'],
+        ['2022-04', 400],
+        ['2022-03', 300],
+        ['2022-02', 200],
+        ['2022-01', 100],
+        ['2021-12', 50]
+      ]);
+
+      var options = {
+        title: '5Months Reviews',
+        chartArea: {width: '450'},
+        hAxis: {
+          title: 'Reviews',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'Years'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+</script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -314,10 +361,27 @@ ul.imgs li{
    
 <table th:each="ck : ${store}">
 	<tr>
- 		<td style="background:#101322;"><img src="../images/치킨로고2.png" width="35" height="35"></td>
+ 		<td style="background:#101322; padding-bottom:5px;"><img src="../images/치킨로고2.png" width="35" height="35"></td>
  		<td align="right" width="40" style="padding-right:15px; background:#101322;"><span th:text="${ck.s_rating}"></span></td>
  	</tr>
 </table>
+<hr style="color:gray">
+
+<!-- 
+<p class="p_tag" align="right">
+<select class="select_tag" id="test" name="test" onchange="OnChange();">
+			<option value="Years" style="border:3px solid gray; font-weight: bold; background: #101322;">Years</option>
+			<option value="Month" style="border:3px solid gray; font-weight: bold; background: #101322;">Months</option>
+</select>
+</p>
+ -->
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<p id="chart_div"></p>
+
+
+
 <hr style="color:gray">
 <div style="font-size:15px; color: white; font-weight:bold; padding-bottom:5px; padding-left:5px;">리뷰</div>  
 <div id="contentView"></div>
@@ -357,6 +421,15 @@ ul.imgs li{
 	<input type="hidden" id="endNum" name="endNum" value="5">
 </form>  
 
+<form id="drawBasic">
+	<input type="hidden" id="2022-04" name="2022-04" th:value="${m_2022_04}">
+	<input type="hidden" id="2022-03" name="2022-03" th:value="${m_2022_03}">
+	<input type="hidden" id="2022-02" name="2022-02" th:value="${m_2022_02}">
+	<input type="hidden" id="2022-01" name="2022-01" th:value="${m_2022_01}">
+	<input type="hidden" id="2021-12" name="2021-12" th:value="${m_2021_12}">
+</form>
+
+
 <div align="center" style="padding-top:0px;">
 	<hr style="color:gray">
   	<button class="myButton">더보기</button>
@@ -388,11 +461,11 @@ function test(){
 			var content = "";
 			//console.log(JSON.stringify(res));
 			for(i=0; i<res.length; i++) {
-				content += "<table>"
-				content += "	<tbody>"
+				content += "<table>";
+				content += "	<tbody>";
 				content += "		<tr>";	
 				content += "			<td class='td_1_1'><img class='userImage' src='../images/사용자3.png'></td>";
-				content += "    		<td class='td_1_2'><span>"+res[i].id+"</span></td>";
+				content += "    		<td class='td_1_2'>&nbsp;<span>"+res[i].id+"</span></td>";
 				content += "    		<td class='td_1_3'><span class='td_date'>"+res[i].date+"</span></td>";
 				content += "		</tr>"
 				content += "		<tr>";	
@@ -424,6 +497,8 @@ function test(){
 	});
 }
 </script>
+
+
 <style>
 .td_3_1{
 	font-weight: normal;
@@ -431,6 +506,7 @@ function test(){
 }
 .rating_padding{
 	padding-right: 5px;
+	vertical-align: top;
 }
 .td_5_1{
 	background:none;
