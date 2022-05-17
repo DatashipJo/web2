@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="app.review.dstp.list.WordMapper">
+
+	<select id="getChickenWord"
+		parameterType="integer"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(word, ',', 1), ',', -1) as ck_word1,
+	   		   SUBSTRING_INDEX(SUBSTRING_INDEX(word, ',', 2), ',', -1) as ck_word2,
+       	       SUBSTRING_INDEX(SUBSTRING_INDEX(word, ',', 3), ',', -1) as ck_word3
+		FROM ck_word WHERE fk = #{num}
+	</select>
+	
+	<select id="reviewWord"
+		parameterType="String"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT * FROM ck_word A LEFT JOIN ck_store B ON A.fk = B.num WHERE A.word LIKE '%${word}%'
+	</select>
+	  
+</mapper> 

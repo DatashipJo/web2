@@ -60,6 +60,12 @@
 		SELECT store,adress,s_rating FROM ck_store WHERE num = #{num};
 	</select>
 	
+	<select id="getChickenWord"
+		parameterType="integer"
+		resultType="app.review.dstp.vo.WordVo">
+		SELECT * FROM ck_word WHERE fk = #{num}
+	</select>
+	
 	<select id="getMapStore"
 		parameterType="integer"
 		resultType="app.review.dstp.vo.StoreVo">
@@ -72,4 +78,4 @@
 		SELECT adress FROM ck_store WHERE num = #{num};
 	</select>
     
-</mapper>
+</mapper> 

@@ -14,6 +14,9 @@ public class StoreDao {
 	@Autowired
 	private ChickenListMapper clm;
 	
+	@Autowired
+	private WordMapper wm;
+	
 	public List<StoreVo> getDetailList(StoreVo paramVo) {
 		return clm.getDetailList(paramVo);
 	}
@@ -51,6 +54,11 @@ public class StoreDao {
 		return clm.getChickenDate(num);
 	}
 	
+	public List<StoreVo> getWord(int num){
+		return wm.getChickenWord(num);
+	}
+	
+	/*
 	public String getMapStore(int num){
 		return clm.getMapStore(num);
 	}
@@ -58,9 +66,13 @@ public class StoreDao {
 	public String getMapAdress(int num){
 		return clm.getMapAdress(num);
 	}
+	*/
 	
 	public List<StoreVo> getStore(int num){
 		return clm.getStore(num);
 	}
-
+	
+	public List<StoreVo> reviewWord(String word){
+		return wm.reviewWord(word);
+	}
 }

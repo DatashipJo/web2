@@ -89,11 +89,6 @@ h1{
 	width: 650px;
 }
 
-a{
-	text-decoration: none;
-	color: white;
-}
-
 td{
 	font-family: sans-serif;
 	background: #172036;
@@ -219,6 +214,12 @@ ul.imgs li{
 .p_tag{
 	padding-bottom: 5px;
 }
+
+a :hover{
+	color: chocolate;
+}
+
+
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" th:inline="javascript">
@@ -284,7 +285,7 @@ function drawBasic() {
 		    	<input type="radio" name="slide" id="slide3">
 		    	<input type="radio" name="slide" id="slide4">
 		    		<ul id="imgholder" class="imgs">
-		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드1.png"></li>
+		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/bhc-썸네일1.jpg" width="650" height="206"></li>
 		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드2.png"></li>
 		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드3.png"></li>
 		    		</ul>
@@ -307,12 +308,26 @@ function drawBasic() {
 	<input type="hidden" id="store" name="store" th:value="${a.store}">
 </form> 
 
+
+
 <table th:each="ck : ${store}">
 	<tr>
  		<td style="background:#101322; padding-bottom:5px;"><img src="../images/치킨로고2.png" width="35" height="35"></td>
  		<td align="right" width="40" style="padding-right:15px; background:#101322;"><span th:text="${ck.s_rating}"></span></td>
  	</tr>
 </table>
+
+<div th:each="w : ${word}">
+	<a th:href="@{/ckWord/{word}(word = ${w.ck_word1})}" style="text-decoration:none; color:white; font-size:20px;">
+		#<span style="font-weight:bold; font-size:20px;" th:text="${w.ck_word1}"></span>
+	</a>&nbsp;
+	<a th:href="@{/ckWord/{word}(word = ${w.ck_word2})}" style="text-decoration:none; color:white; font-size:20px;">
+		#<span style="font-weight:bold; font-size:20px;" th:text="${w.ck_word2}"></span>
+	</a>&nbsp; 
+	<a th:href="@{/ckWord/{word}(word = ${w.ck_word3})}" style="text-decoration:none; color:white; font-size:20px;">
+		#<span style="font-weight:bold; font-size:20px;" th:text="${w.ck_word3}"></span>
+	</a>
+</div>
 
 <hr style="color:gray">
 

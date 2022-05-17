@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import app.review.dstp.list.StoreDao;
 import app.review.dstp.service.StoreService;
 import app.review.dstp.vo.StoreVo;
-import app.review.dstp.vo.DateVo;
 
 @Controller
 @RequestMapping("/")
@@ -50,7 +49,7 @@ public class chicken
 		m.addAttribute("store", dao.getStore(num));
 		m.addAttribute("num", num);
 		m.addAttribute("months", dao.getChickenDate(num));
-//		m.addAttribute("test", svc.test(d));
+		m.addAttribute("word", dao.getWord(num));
 //		m.addAttribute("s", dao.getMapStore(num));
 //		m.addAttribute("a", dao.getMapAdress(num));
 		return "thymeleaf/chicken_detail";
@@ -61,11 +60,12 @@ public class chicken
 	public List<StoreVo> MoreView(StoreVo paramVo) {
 		return dao.getDetailList(paramVo);
 	}
-
-//    @PostMapping(value="/click")
-//    @ResponseBody
-//    public List<DateVo> dateReview(DateVo paramVo){
-//       return dao.getChickenDate(paramVo);
-//    }
+	
+	@GetMapping("/ckWord/{word}")
+	public String reviewWord(@PathVariable("word") String word, Model m) {
+		System.out.println(word);
+		m.addAttribute("tableList", svc.reviewWord(word));
+		return "thymeleaf/chicken_list";
+	}
 
 }

@@ -190,6 +190,10 @@ ul.imgs li{
     margin: 0;
     transition-delay: 0.9s; /* 트랜지션 지연 시간 지정 */
 }
+a :hover{
+	color: chocolate;
+}
+
 </style>
 </head>
 <body style="background:#101322;">
@@ -228,7 +232,7 @@ ul.imgs li{
         <tr>	
 	        <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;" width=50><a href="#"><img th:src="${list.img}" width="40" height="50"></a></td>
 	        <td style="padding-left:5px; padding-right:5px;" width=50>&nbsp;[[${list.idx}]]</td>
-	        <td align="left"><a style="text-decoration:none;" th:href="@{/detail/{num}(num = ${list.num})}"><span th:text="${list.store}"></span></a></td>
+	        <td align="left"><a style="text-decoration:none; color:white" th:href="@{/detail/{num}(num = ${list.num})}"><span th:text="${list.store}"></span></a></td>
 	        <td align="right"><img src="../images/치킨로고2.png" width="35" height="35"></td>
 	        <td align="right" width="55" style="padding-right:15px;">&nbsp;<span th:text="${list.s_rating}"></span></td>
         </tr>
