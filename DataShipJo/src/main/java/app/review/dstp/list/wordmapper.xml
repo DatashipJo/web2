@@ -16,7 +16,7 @@
 	<select id="reviewWord"
 		parameterType="String"
 		resultType="app.review.dstp.vo.StoreVo">
-		SELECT * FROM ck_word A LEFT JOIN ck_store B ON A.fk = B.num WHERE A.word LIKE '%${word}%'
+		SELECT A.fk, A.store, A.word, B.num, B.img, B.s_rating FROM ck_word A LEFT JOIN ck_store B ON A.fk = B.num WHERE A.word LIKE '%${word}%'
 	</select>
 	  
 </mapper> 

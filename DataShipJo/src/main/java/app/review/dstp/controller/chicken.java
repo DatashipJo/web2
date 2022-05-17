@@ -63,7 +63,6 @@ public class chicken
 	
 	@GetMapping("/ckWord/{word}")
 	public String reviewWord(@PathVariable("word") String word, Model m) {
-		System.out.println(word);
 		m.addAttribute("tableList", svc.reviewWord(word));
 		return "thymeleaf/chicken_list";
 	}
