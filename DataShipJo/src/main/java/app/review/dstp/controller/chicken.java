@@ -67,4 +67,24 @@ public class chicken
 		return "thymeleaf/chicken_list";
 	}
 
+	@GetMapping("/search")
+	public String serarchTest(Model m) {
+		m.addAttribute("search", dao.getChickenList());
+		return "thymeleaf/list";
+	}
+	
+	@PostMapping(value="/wordList/{tags}")
+	@ResponseBody
+	public List<StoreVo> Word(@PathVariable("tags") String tags) {
+		System.out.println(tags);
+		return dao.wordList(tags);
+	}
+	
+	@GetMapping("/wordList/{tags}")
+	public String wordView(@PathVariable("tags") String tags, Model m){
+		System.out.println(tags);
+		m.addAttribute("tableList", svc.wordList(tags));
+		return "thymeleaf/chicken_list";
+	}
+	
 }

@@ -18,5 +18,11 @@
 		resultType="app.review.dstp.vo.StoreVo">
 		SELECT A.fk, A.store, A.word, B.num, B.img, B.s_rating FROM ck_word A LEFT JOIN ck_store B ON A.fk = B.num WHERE A.word LIKE '%${word}%'
 	</select>
+	
+	<select id="wordList"
+		parameterType="String"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT * FROM ck_store WHERE store LIKE '%${tags}%' or adress LIKE '%${tags}%'
+	</select>
 	  
 </mapper> 

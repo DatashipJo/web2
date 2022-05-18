@@ -75,4 +75,8 @@ public class StoreDao {
 	public List<StoreVo> reviewWord(String word){
 		return wm.reviewWord(word);
 	}
+	
+	public List<StoreVo> wordList(String tags){
+		return wm.wordList(tags);
+	}
 }

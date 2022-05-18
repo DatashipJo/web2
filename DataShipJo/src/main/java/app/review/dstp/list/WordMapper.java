@@ -11,4 +11,5 @@ public interface WordMapper
 {
 	List<StoreVo> getChickenWord(int num);
 	List<StoreVo> reviewWord(String word);
+	List<StoreVo> wordList(String tags);
 }

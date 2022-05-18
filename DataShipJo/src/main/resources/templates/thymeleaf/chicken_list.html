@@ -194,6 +194,13 @@ a :hover{
 	color: chocolate;
 }
 
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 </style>
 </head>
 <body style="background:#101322;">
@@ -204,7 +211,7 @@ a :hover{
 <input type="hidden" name="viewCount" id="viewCount" value="0">
 <input type="hidden" name="startCount" id="startCount" value="0">
 <div id="wrapper">
-  <h1>[[${area}]] '치킨' 랭킹</h1>
+  <h1 style="font-family:Cafe24Ssurround">[[${area}]] '치킨' 랭킹</h1>
   <table id="keywords" cellspacing="0" cellpadding="0">
     <thead>
     	<tr>
@@ -231,7 +238,7 @@ a :hover{
 	<table id="keywords" cellspacing="0" cellpadding="0"  th:each="list : ${tableList}" style="padding-top:20px;">    	
         <tr>	
 	        <td style="padding-left:5px; padding-top:5px; padding-right:5px; padding-bottom:5px;" width=50><a href="#"><img th:src="${list.img}" width="40" height="50"></a></td>
-	        <td style="padding-left:5px; padding-right:5px;" width=50>&nbsp;[[${list.idx}]]</td>
+	        <td style="padding-left:5px; padding-right:5px;" width="35px">&nbsp;[[${list.idx}]]</td>
 	        <td align="left"><a style="text-decoration:none; color:white" th:href="@{/detail/{num}(num = ${list.num})}"><span th:text="${list.store}"></span></a></td>
 	        <td align="right"><img src="../images/치킨로고2.png" width="35" height="35"></td>
 	        <td align="right" width="55" style="padding-right:15px;">&nbsp;<span th:text="${list.s_rating}"></span></td>

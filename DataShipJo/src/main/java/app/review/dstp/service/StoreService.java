@@ -93,4 +93,20 @@ public class StoreService {
         return newList;
     }
     
+    public List<StoreIdxVo> wordList(String tags){
+        List<StoreVo> dbList = dao.wordList(tags);
+        List<StoreIdxVo> newList = new ArrayList<StoreIdxVo>();
+        for ( int i=0 ; i < dbList.size(); i++ ) {
+            StoreIdxVo newVo = new StoreIdxVo();
+            newVo.setIdx(i+1);
+            newVo.setNum(dbList.get(i).getNum());
+            newVo.setStore(dbList.get(i).getStore());
+            newVo.setImg(dbList.get(i).getImg());
+            newVo.setAdress(dbList.get(i).getAdress());
+            newVo.setS_rating(dbList.get(i).getS_rating());
+            newList.add(newVo);
+        }
+        return newList;
+    }
+    
 } // end C
