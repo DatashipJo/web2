@@ -17,14 +17,6 @@
 		SELECT num,store,adress,s_rating,img
 		FROM ck_store WHERE adress LIKE '${groupedArea}'
 	</select>
-	
-	<select id="getDetailList2"
-		parameterType="integer"
-        resultType="app.review.dstp.vo.StoreVo">
-        SELECT A.* , B.* 
-        FROM ck_store A, ck_review B 
-        WHERE A.num = B.fk and A.num = #{num} order by B.num limit 0,5
-    </select>
     
     <select id="getDetailList"
 		parameterType="app.review.dstp.vo.StoreVo"
@@ -38,14 +30,6 @@
 			WHERE A.num = B.fk and A.num = #{num}
 		) as C
 		where C.rnum between #{startNum} and #{endNum}
-    </select>
-    
-    <select id="getMoreView"
-		parameterType="integer"
-        resultType="app.review.dstp.vo.StoreVo">
-        SELECT A.* , B.* 
-        FROM ck_store A, ck_review B 
-        WHERE A.num = B.fk and A.num = #{num};
     </select>
     
     <select id="getChickenDate"
@@ -64,18 +48,6 @@
 		parameterType="integer"
 		resultType="app.review.dstp.vo.WordVo">
 		SELECT * FROM ck_word WHERE fk = #{num}
-	</select>
-	
-	<select id="getMapStore"
-		parameterType="integer"
-		resultType="app.review.dstp.vo.StoreVo">
-		SELECT store FROM ck_store WHERE num = #{num};
-	</select>
-	
-	<select id="getMapAdress"
-		parameterType="integer"
-		resultType="app.review.dstp.vo.StoreVo">
-		SELECT adress FROM ck_store WHERE num = #{num};
 	</select>
     
 </mapper> 

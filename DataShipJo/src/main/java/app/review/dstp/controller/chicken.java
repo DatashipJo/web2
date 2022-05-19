@@ -45,13 +45,10 @@ public class chicken
 
 	@GetMapping("detail/{num}")
 	public String go_post(@PathVariable("num") int num, Model m){
-//       m.addAttribute("tableList", dao.getDetailList2(num));
 		m.addAttribute("store", dao.getStore(num));
 		m.addAttribute("num", num);
 		m.addAttribute("months", dao.getChickenDate(num));
 		m.addAttribute("word", dao.getWord(num));
-//		m.addAttribute("s", dao.getMapStore(num));
-//		m.addAttribute("a", dao.getMapAdress(num));
 		return "thymeleaf/chicken_detail";
 	}
 
@@ -66,19 +63,6 @@ public class chicken
 		m.addAttribute("tableList", svc.reviewWord(word));
 		return "thymeleaf/chicken_list";
 	}
-
-	@GetMapping("/search")
-	public String serarchTest(Model m) {
-		m.addAttribute("search", dao.getChickenList());
-		return "thymeleaf/list";
-	}
-	
-	@PostMapping(value="/wordList/{tags}")
-	@ResponseBody
-	public List<StoreVo> Word(@PathVariable("tags") String tags) {
-		System.out.println(tags);
-		return dao.wordList(tags);
-	}
 	
 	@GetMapping("/wordList/{tags}")
 	public String wordView(@PathVariable("tags") String tags, Model m){
@@ -86,5 +70,4 @@ public class chicken
 		m.addAttribute("tableList", svc.wordList(tags));
 		return "thymeleaf/chicken_list";
 	}
-	
 }
