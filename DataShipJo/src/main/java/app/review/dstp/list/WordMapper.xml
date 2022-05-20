@@ -25,4 +25,9 @@
 		SELECT * FROM ck_store WHERE store LIKE '%${tags}%' or adress LIKE '%${tags}%'
 	</select>
 	  
+	<select id="bannerList"
+		parameterType = "integer"
+		resultType="app.review.dstp.vo.StoreVo">
+		SELECT banner FROM ck_word WHERE fk = #{num}
+	</select> 
 </mapper> 

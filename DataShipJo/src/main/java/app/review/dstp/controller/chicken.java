@@ -49,6 +49,7 @@ public class chicken
 		m.addAttribute("num", num);
 		m.addAttribute("months", dao.getChickenDate(num));
 		m.addAttribute("word", dao.getWord(num));
+		m.addAttribute("banner", dao.getBanner(num));
 		return "thymeleaf/chicken_detail";
 	}
 

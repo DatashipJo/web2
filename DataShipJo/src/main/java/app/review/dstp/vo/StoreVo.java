@@ -19,12 +19,27 @@ public class StoreVo
 	private String ck_word1;
 	private String ck_word2;
 	private String ck_word3;
+	private String banner;
 	
 	public StoreVo() {}
 
 	
 	
 	
+	public String getBanner() {
+		return banner;
+	}
+
+
+
+
+	public void setBanner(String banner) {
+		this.banner = banner;
+	}
+
+
+
+
 	public String getWord() {
 		return word;
 	}

@@ -54,4 +54,8 @@ public class StoreDao {
 	public List<StoreVo> wordList(String tags){
 		return wm.wordList(tags);
 	}
+
+	public List<StoreVo> getBanner(int num) {
+		return wm.bannerList(num);
+	}
 }
