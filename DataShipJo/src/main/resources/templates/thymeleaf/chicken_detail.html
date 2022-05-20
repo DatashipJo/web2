@@ -322,7 +322,7 @@ function drawBasic() {
 			    	<input type="radio" name="slide" id="slide4">
 			    	
 		    		<ul id="imgholder" class="imgs" th:each = "bn : ${banner}">
-		        		<li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" th:src="${bn.banner}" width="650" height="206"></li>
+		        		<li><img style="image-rendering: -webkit-optimize-contrast; border-radius: 10px 10px 10px 10px; padding-bottom:5px;" th:src="${bn.banner}" width="650" height="206"></li>
 		        		<!-- <li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드3.png"></li> -->
 		        		<!-- <li><img style="border-radius: 10px 10px 10px 10px; padding-bottom:5px;" src="../images/슬라이드1.png"></li> -->
 		    		</ul>
