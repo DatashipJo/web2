@@ -20,12 +20,20 @@ public class StoreVo
 	private String ck_word2;
 	private String ck_word3;
 	private String banner;
+
+	private Float score;
 	
 	public StoreVo() {}
 
-	
-	
-	
+
+	public Float getScore() {
+		return score;
+	}
+
+	public void setScore(Float score) {
+		this.score = score;
+	}
+
 	public String getBanner() {
 		return banner;
 	}

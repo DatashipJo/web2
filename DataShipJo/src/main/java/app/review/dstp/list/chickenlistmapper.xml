@@ -35,7 +35,7 @@
     <select id="getChickenDate"
     	parameterType="integer"
     	resultType="app.review.dstp.vo.DateVo">
-    	SELECT m_2022_04, m_2022_03, m_2022_02, m_2022_01, m_2021_12 FROM ck_date WHERE fk = #{num}
+    	SELECT m_2022_04, m_2022_03, m_2022_02, m_2022_01, m![](../../../../../../../../../../../../../Users/lucas/Pictures/스크린샷 2022-05-22 오후 6.59.18.png)_2021_12 FROM ck_date WHERE fk = #{num}
     </select>
 	
 	<select id="getStore"

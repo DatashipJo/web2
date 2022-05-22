@@ -65,10 +65,9 @@ public class chicken
 		return "thymeleaf/chicken_list";
 	}
 	
-	@GetMapping("/wordList/{tags}")
-	public String wordView(@PathVariable("tags") String tags, Model m){
-		System.out.println(tags);
-		m.addAttribute("tableList", svc.wordList(tags));
+	@GetMapping("/wordList/{skeword}")
+	public String wordView(@PathVariable("skeword") String skeword, Model m){
+		m.addAttribute("tableList", svc.wordList(skeword));
 		return "thymeleaf/chicken_list";
 	}
 }
